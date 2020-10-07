@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_id: 1
+  sku: 1
+  category: 1
+  selling_rice: 1.5
+  cost_price: 1.5
+  gst: 1.5
+  discount_id: 1
+  discount_amount: 1.5
+  discount_percentage: 1.5
+  quantity: 1
+  exchange_available: false
+  replace: false
+  status: false
+  delivery_date: 2020-10-07
+
+two:
+  product_id: 1
+  sku: 1
+  category: 1
+  selling_rice: 1.5
+  cost_price: 1.5
+  gst: 1.5
+  discount_id: 1
+  discount_amount: 1.5
+  discount_percentage: 1.5
+  quantity: 1
+  exchange_available: false
+  replace: false
+  status: false
+  delivery_date: 2020-10-07

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Discounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Discount code</th>
+      <th>No of coupon</th>
+      <th>Valid from</th>
+      <th>Valid to</th>
+      <th>Minimum order value</th>
+      <th>Discount amount</th>
+      <th>Auto apply</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @discounts.each do |discount| %>
+      <tr>
+        <td><%= discount.discount_code %></td>
+        <td><%= discount.no_of_coupon %></td>
+        <td><%= discount.valid_from %></td>
+        <td><%= discount.valid_to %></td>
+        <td><%= discount.minimum_order_value %></td>
+        <td><%= discount.discount_amount %></td>
+        <td><%= discount.auto_apply %></td>
+        <td><%= discount.status %></td>
+        <td><%= link_to 'Show', discount %></td>
+        <td><%= link_to 'Edit', edit_discount_path(discount) %></td>
+        <td><%= link_to 'Destroy', discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Discount', new_discount_path %>

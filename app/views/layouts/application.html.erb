@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AlcoB2c</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title></title>
+</head>
+<body>
+
+<% if params[:action] != "caller_login" %>
+<header>
+  <div class="head">
+    <span class="item2"><a href="#">Logo</a></span>
+    <span class="item3">Super Admin Dasboard</span>
+    <a href="#" class="item4">Logout</a>
+  </div>
+</header>
+<main>
+  <div class="container-fluid section">
+    <div class="row">
+      <div class="col-md-2 col-sm-2 col-xs-2 sideBar">
+        <ul>
+          <% if session[:admin] == true %>
+            <li>
+              <a href="#">Caller List</a>
+            </li>
+            <li>
+              <a href="#">Product List</a>
+            </li>
+            <li>
+              <a href="#">Discount Lit</a>
+            </li>
+            <li>
+              <a href="#">Customer List</a>
+            </li>
+          <% end %>
+          <% if session[:admin] != true %>
+            <li>
+              <a href="/product_selling">Sell Product</a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+  <%end %>
+      <div class="col-md-10 col-sm-10 col-xs-10">
+        <div class="content">
+
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<% if params[:action] != "caller_login" %>
+<footer><div class="copyright">Copyright@Company Name</div></footer>
+<%end %>
+</body>
+</html>
+
+</body>
+</html>

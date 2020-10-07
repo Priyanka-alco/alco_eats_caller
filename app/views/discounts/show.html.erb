@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Discount code:</strong>
+  <%= @discount.discount_code %>
+</p>
+
+<p>
+  <strong>No of coupon:</strong>
+  <%= @discount.no_of_coupon %>
+</p>
+
+<p>
+  <strong>Valid from:</strong>
+  <%= @discount.valid_from %>
+</p>
+
+<p>
+  <strong>Valid to:</strong>
+  <%= @discount.valid_to %>
+</p>
+
+<p>
+  <strong>Minimum order value:</strong>
+  <%= @discount.minimum_order_value %>
+</p>
+
+<p>
+  <strong>Discount amount:</strong>
+  <%= @discount.discount_amount %>
+</p>
+
+<p>
+  <strong>Auto apply:</strong>
+  <%= @discount.auto_apply %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @discount.status %>
+</p>
+
+<%= link_to 'Edit', edit_discount_path(@discount) %> |
+<%= link_to 'Back', discounts_path %>

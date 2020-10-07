@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  discount_code: MyString
+  no_of_coupon: 1
+  valid_from: 2020-10-07
+  valid_to: 2020-10-07
+  minimum_order_value: 1.5
+  discount_amount: 1.5
+  auto_apply: false
+  status: false
+
+two:
+  discount_code: MyString
+  no_of_coupon: 1
+  valid_from: 2020-10-07
+  valid_to: 2020-10-07
+  minimum_order_value: 1.5
+  discount_amount: 1.5
+  auto_apply: false
+  status: false

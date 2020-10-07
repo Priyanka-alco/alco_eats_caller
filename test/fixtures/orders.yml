@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cust_id: 1
+  total: 1.5
+  discount_id: 1
+  seller_id: 1
+  status: 1
+
+two:
+  cust_id: 1
+  total: 1.5
+  discount_id: 1
+  seller_id: 1
+  status: 1

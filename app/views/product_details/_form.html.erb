@@ -1,0 +1,87 @@
+<%= form_for(product_detail) do |f| %>
+  <% if product_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product_detail.errors.count, "error") %> prohibited this product_detail from being saved:</h2>
+
+      <ul>
+      <% product_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :product_id %>
+    <%= f.number_field :product_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sku %>
+    <%= f.number_field :sku %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.number_field :category %>
+  </div>
+
+  <div class="field">
+    <%= f.label :selling_rice %>
+    <%= f.text_field :selling_rice %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cost_price %>
+    <%= f.text_field :cost_price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gst %>
+    <%= f.text_field :gst %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_id %>
+    <%= f.number_field :discount_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_amount %>
+    <%= f.text_field :discount_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_percentage %>
+    <%= f.text_field :discount_percentage %>
+  </div>
+
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= f.label :exchange_available %>
+    <%= f.check_box :exchange_available %>
+  </div>
+
+  <div class="field">
+    <%= f.label :replace %>
+    <%= f.check_box :replace %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.check_box :status %>
+  </div>
+
+  <div class="field">
+    <%= f.label :delivery_date %>
+    <%= f.date_select :delivery_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

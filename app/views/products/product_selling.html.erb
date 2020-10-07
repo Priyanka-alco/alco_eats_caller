@@ -1,0 +1,48 @@
+<script>
+    <% if params['status'] == "200" %>
+    alert("Loggedin Successfully");
+    <% end %>
+</script>
+<table>
+  <tbody>
+  <% @result['product'].each_with_index  do |product,index| %>
+  <%   %>
+  <tr>
+    <td>
+      <input type="text" class="form-control" readonly="true" value=<%= product['product'].product_name %> >
+    </td>
+    <td>
+      <select class="sku" id="<%= index %>">
+        <% product['product_detail'].each do |product_detail_val| %>
+        <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
+        <% end %>
+      </select>
+    </td>
+    <td>
+      <select class="qty">
+        <% (1..10).each do |val| %>
+          <option value="<%=val %>"><%=val %></option>
+        <% end %>
+      </select>
+    </td>
+    <td>
+      <input type="text" class="price_<%= index %>" placeholder="Price">
+    </td>
+  </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+  $('.qty').change(function(){
+      var sku = parseInt($( ".sku" ).text(),10);
+      var qty = parseInt($(this).val(),10);
+      var id = $(this).attr("id");
+      var price = sku*qty;
+      $('.price_'+id).val(price);
+      $('.price_'+id).text(price);
+
+
+
+  });
+
+</script>

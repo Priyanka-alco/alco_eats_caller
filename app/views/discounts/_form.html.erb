@@ -1,0 +1,57 @@
+<%= form_for(discount) do |f| %>
+  <% if discount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
+
+      <ul>
+      <% discount.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :discount_code %>
+    <%= f.text_field :discount_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :no_of_coupon %>
+    <%= f.number_field :no_of_coupon %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valid_from %>
+    <%= f.date_select :valid_from %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valid_to %>
+    <%= f.date_select :valid_to %>
+  </div>
+
+  <div class="field">
+    <%= f.label :minimum_order_value %>
+    <%= f.text_field :minimum_order_value %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_amount %>
+    <%= f.text_field :discount_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :auto_apply %>
+    <%= f.check_box :auto_apply %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.check_box :status %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

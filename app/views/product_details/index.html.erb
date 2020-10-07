@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Product Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Sku</th>
+      <th>Category</th>
+      <th>Selling rice</th>
+      <th>Cost price</th>
+      <th>Gst</th>
+      <th>Discount</th>
+      <th>Discount amount</th>
+      <th>Discount percentage</th>
+      <th>Quantity</th>
+      <th>Exchange available</th>
+      <th>Replace</th>
+      <th>Status</th>
+      <th>Delivery date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_details.each do |product_detail| %>
+      <tr>
+        <td><%= product_detail.product_id %></td>
+        <td><%= product_detail.sku %></td>
+        <td><%= product_detail.category %></td>
+        <td><%= product_detail.selling_rice %></td>
+        <td><%= product_detail.cost_price %></td>
+        <td><%= product_detail.gst %></td>
+        <td><%= product_detail.discount_id %></td>
+        <td><%= product_detail.discount_amount %></td>
+        <td><%= product_detail.discount_percentage %></td>
+        <td><%= product_detail.quantity %></td>
+        <td><%= product_detail.exchange_available %></td>
+        <td><%= product_detail.replace %></td>
+        <td><%= product_detail.status %></td>
+        <td><%= product_detail.delivery_date %></td>
+        <td><%= link_to 'Show', product_detail %></td>
+        <td><%= link_to 'Edit', edit_product_detail_path(product_detail) %></td>
+        <td><%= link_to 'Destroy', product_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product Detail', new_product_detail_path %>
