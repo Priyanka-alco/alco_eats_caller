@@ -12,7 +12,7 @@ class AuthenticationController < ApplicationController
         session[:current_user_id] = params['email']
         session[:admin] = true if  params['email'] == "admin@gmail.com"
         session[:email_id] = params['email']
-        puts "**************session***#{session[:current_user_id]}"
+        # puts "**************session***#{session[:current_user_id]}"
         @res['message'] = "Loggedin Successfully"
       else
         @res['success'] = false
