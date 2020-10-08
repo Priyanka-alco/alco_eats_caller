@@ -18,7 +18,7 @@
           <td><%= val['customer_detail'][0].phone if val['customer_detail'][0].phone.present?%></td>
           <td><%= val['order_detail'].created_at.to_date if val['order_detail'].created_at.present? %></td>
           <td><%= val['order_detail'].total if val['order_detail'].total.present? %></td>
-          <td><a href="">View Details</a></td>
+          <td><a href="/product_selling_detail?order_id=<%= val['order_detail'].id %>">View Details</a></td>
         </tr>
       <%end %>
       </tbody>
