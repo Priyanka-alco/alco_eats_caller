@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'order',to: 'orders#order'
   get 'logout',to: 'authentication#logout'
   get 'product_selling_detail' , to:'products#product_selling_detail'
+  get 'customer_buy_detail' , to:'products#customer_buy_detail'
   post 'authenticate', to: 'authentication#authenticate'
   post 'buy_product', to: 'products#buy_product'
 end
