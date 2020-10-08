@@ -33,34 +33,45 @@ class ProductsController < ApplicationController
           @result['status'] = 500
         end
         @result['product'] = res
-        end_time = Time.now
-        @result['timing'] = ( end_time-start_time)
+
+
     puts "****#{@result['product']}"
         # render json: @result
   end
-
+  def product_selling_detail
+    seller = session[:admin] != true ? User.where("email='#{session[:email_id]}' and status =1") :  User.where("status =1")
+    order_detail = Order.where("seller_id=#{seller[0].id}")
+    @res = []
+    order_detail.each do |val|
+      result = {}
+      result['order_detail'] = val
+      customer_detail = Customer.where("id=#{val.id}")
+      result['customer_detail'] = customer_detail
+      @res << result
+    end
+  end
   def buy_product
-    first_name = params['first_name']
+    name = params['first_name']
     last_name = params['last_name']
-    email_id = params['email_id']
+    email_id = params['email']
     phone_no = params['phone_no']
     dob = params['dob']
+    payment_type = params['payment_type']
     anniversary_date = params['anniversary_date']
-    order_detail = params['order_detail']
-    create_customer = Customer.create(first_name=>first_name,
-                    last_name=>last_name,
-                    email_id=>email_id,
-                    phone_no=>phone_no,
-                    dob=>dob,
-                    anniversary_date=>anniversary_date)
-    if create_customer
-      if order_detail.present?
-        order_detail.each do |order|
-
-        end
-      end
+    product_name = params['product_name']
+    product_sku = params['sku']
+    product_qty = params['qty']
+    price = params['price']
+    create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no)
+    create_order = Order.create(:cust_id=>create_customer.id,
+                                :seller_id=>1,
+                                :total=>1500,
+                                :status=>1,
+                                :payment_type=>payment_type)
+    puts "********#{create_customer.id}*********#{create_order.id}"
+    product_name.each_with_index do |val,index|
+      OrderDetail.create(:sku_id=>product_sku["#{index}"],:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
-
   end
 
   # GET /products/new
@@ -110,6 +121,10 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def card_details
+
   end
 
   private

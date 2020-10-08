@@ -8,7 +8,7 @@ header {
     padding: 10px;
     border: 1px solid;
     border-color: rgba(0, 0, 0, 0.4);
-    background-color: rgba(0,0,0, 0.9);
+    background-color: #003460;
     box-shadow: 1px 1px black;
     font-size: 18px;
 }
@@ -17,6 +17,8 @@ header {
     display: inline-block;
     margin-left: 4%;
     width: 40%;
+    /*width: 200px;*/
+    height: 52px;
 }
 
 .item2 a {
@@ -68,13 +70,13 @@ nav a:hover {
 
 .sideBar {
     min-height: 100vh;
-    background-color: rgba(0,0,0, 0.9);
+    background-color: #003460;
     border: 1px solid;
     border-color: rgba(0, 0, 0, 0.4);
     box-shadow: 1px 1px black;
 }
 
-.sideBar{
+.sideBar {
     padding-top: 6%;
 }
 
@@ -95,7 +97,7 @@ footer {
     bottom: 0;
     padding: 15px;
     color: white;
-    background-color: rgba(0,0,0, 0.9);
+    background-color: #003460;
     width: 100%;
     height: auto;
 }
@@ -103,5 +105,14 @@ footer {
 .copyright {
     width: 200px;
     margin: 0 auto;
+}
+
+.content {
+    width: 100%;
+    margin: 15px auto;
+}
+
+.submit {
+    margin-left: 40%;
 }
 

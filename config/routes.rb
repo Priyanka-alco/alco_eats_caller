@@ -13,5 +13,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'caller_login',to: 'users#caller_login'
   get 'product_selling',to: 'products#product_selling'
+  get 'card_details',to: 'products#card_details'
+  get 'order',to: 'orders#order'
+  get 'product_selling_detail' , to:'products#product_selling_detail'
   post 'authenticate', to: 'authentication#authenticate'
+  post 'buy_product', to: 'products#buy_product'
 end

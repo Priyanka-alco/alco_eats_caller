@@ -20,7 +20,18 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
   end
-
+  def order
+    seller = session[:admin] != true ? User.where("email='#{session[:email_id]}' and status =1") :  User.where("status =1")
+    order_detail = Order.where("seller_id=#{seller[0].id}")
+    @res = []
+    order_detail.each do |val|
+      result = {}
+      result['order_detail'] = val
+      customer_detail = Customer.where("id=#{val.id}")
+      result['customer_detail'] = customer_detail
+      @res << result
+    end
+  end
   # POST /orders
   # POST /orders.json
   def create

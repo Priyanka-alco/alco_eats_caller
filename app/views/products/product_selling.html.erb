@@ -1,48 +1,198 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#product" class="nav-link active" data-toggle="tab">
+      Product
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#view" class="nav-link" data-toggle="tab"> View </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane container-fluid active" id="product">
+    <form class="form-inline" action="buy_product" method="post">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mt-4">
+            <div class="card-header">Product</div>
+            <% @result['product'].each_with_index  do |product,index| %>
+              <div class="card-body">
+                <input
+                  type="text"
+                  placeholder="Product"
+                  class="form-control"
+                  name="product_name[<%= index %>]"
+                  value="<%= product['product'].product_name %> "
+                  style="width: 40%"
+                  />&nbsp;&nbsp;
+                <select
+                  class="form-control sku_<%= index %> sku_detail"
+                  name="sku[<%= index %>]"
+                >
+                  <option disabled selected>SKU</option>
+                  <% product['product_detail'].each do |product_detail_val| %>
+                    <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
+                  <% end %></select
+                >&nbsp;&nbsp;
+                <select
+                  class="form-control qty"
+                  name="qty[<%= index %>]"
+                  id="<%= index %>"
+                >
+                  <option disabled selected>QTY</option>
+                  <% (1..10).each do |val| %>
+                    <option value="<%=val %>"><%=val %></option>
+                  <% end %></select
+                >&nbsp;&nbsp;
+                <!--          <select class="form-control discount discount_" style="width: 18%">-->
+                <!--            <option disabled selected>DISCOUNT</option>-->
+                <!--              <option value=""></option>-->
+                <!--            </select-->
+                <!--          >&nbsp;&nbsp;-->
+                <input
+                  name="price[<%= index %>]"
+                  type="text"
+                  placeholder="PRICE"
+                  class="form-control price_[<%= index %>]"
+                  style="width: 15%"
+                  />
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mt-4">
+            <div class="card-header">Customer</div>
+            <div class="card-body">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="first_name"
+                  class="form-control"
+                  placeholder="First Name"
+                  />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="last_name"
+                  class="form-control"
+                  placeholder="Last Name"
+                  />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="tel"
+                  name="phone_no"
+                  class="form-control"
+                  placeholder="Contact"
+                  />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="date"
+                  name="dob"
+                  class="form-control"
+                  placeholder="DOB"
+                  />
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="date"
+                  name="anniversary_date"
+                  class="form-control"
+                  placeholder="Anniversary Date"
+                  />
+              </div>
+              <div class="form-group">
+                <input
+                  type="submit"
+                  name="submit"
+                  class="form-control"
+                  />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="tab-pane container-fluid fade" id="view">
+    <div class="table-responsive mt-4">
+      <table class="table table-bordered table-hover text-center">
+        <thead>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Price</th>
+        <th>Purchase Date</th>
+        <th>Details</th>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Arpit sharma</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>
+            <button class="btn btn-dark">Detail</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script>
-    <% if params['status'] == "200" %>
-    alert("Loggedin Successfully");
-    <% end %>
-</script>
-<table>
-  <tbody>
-  <% @result['product'].each_with_index  do |product,index| %>
-  <%   %>
-  <tr>
-    <td>
-      <input type="text" class="form-control" readonly="true" value=<%= product['product'].product_name %> >
-    </td>
-    <td>
-      <select class="sku" id="<%= index %>">
-        <% product['product_detail'].each do |product_detail_val| %>
-        <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
-        <% end %>
-      </select>
-    </td>
-    <td>
-      <select class="qty">
-        <% (1..10).each do |val| %>
-          <option value="<%=val %>"><%=val %></option>
-        <% end %>
-      </select>
-    </td>
-    <td>
-      <input type="text" class="price_<%= index %>" placeholder="Price">
-    </td>
-  </tr>
-    <% end %>
-  </tbody>
-</table>
-<script>
-  $('.qty').change(function(){
-      var sku = parseInt($( ".sku" ).text(),10);
-      var qty = parseInt($(this).val(),10);
-      var id = $(this).attr("id");
-      var price = sku*qty;
-      $('.price_'+id).val(price);
-      $('.price_'+id).text(price);
-
-
-
-  });
-
+    $(".qty").change(function () {
+        var id = $(this).attr("id");
+        var sku = parseInt(
+            $(".sku_" + id + " option:selected").text(),
+            10
+        );
+        console.log(id);
+        var qty = parseInt($(this).val(), 10);
+        var price = sku * qty;
+        $(".price_" + id).val(price);
+    });
+    $(".sku_detail").change(function () {
+        var id = $(this).next().attr("id");
+        var sku = parseInt(
+            $(".sku_" + id + " option:selected").text(),
+            10
+        );
+        var qty = parseInt($(this).next().val(), 10);
+        var price = sku * qty;
+        console.log(id);
+        console.log(qty);
+        console.log(price);
+        $(".price_" + id).val(price);
+    });
+    $(".discount").change(function () {
+        var price = $(this).next().val();
+        var discount = parseInt($(this).text(), 10);
+        // var qty = parseInt($(this).next().val(),10);
+        // var price = sku*qty;
+        console.log(price);
+        console.log(discount);
+        // console.log(price);
+        // $('.price_'+id).val(price);
+    });
 </script>
