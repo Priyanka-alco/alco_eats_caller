@@ -63,8 +63,9 @@ class ProductsController < ApplicationController
     product_name = params['product_name']
     product_sku = params['sku']
     product_qty = params['qty']
+    address = params['address']
     price = params['price']
-    create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no)
+    create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no,:address=>address)
     create_order = Order.create(:cust_id=>create_customer.id,
                                 :seller_id=>1,
                                 :total=>1500,
