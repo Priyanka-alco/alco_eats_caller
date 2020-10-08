@@ -3,7 +3,7 @@
 <head>
   <title>AlcoB2c</title>
   <%= csrf_meta_tags %>
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
@@ -17,19 +17,21 @@
 </head>
 <body>
 
-<% if params[:action] != "caller_login" %>
+
   <header>
     <div class="head">
         <span class="item2"
         ><%= image_tag("alco_eats.png",:class => "img_preview") %>
         </span>
-      <span class="item3">Super Admin Dashboard</span>
+      <span class="item3">Alco Eats Call Center</span>
       <a href="/logout" class="item4">Logout</a>
     </div>
   </header>
 <main>
   <div class="container-fluid section">
     <div class="row">
+
+      <% if params[:action] != "caller_login" %>
       <div class=" col-md-2 sideBar">
         <ul>
           <% if session[:admin] == true %>
@@ -53,7 +55,7 @@
           <% end %>
         </ul>
       </div>
-  <%end %>
+      <%end %>
       <div class="col-md-10" >
         <div class="content">
 
@@ -63,9 +65,7 @@
     </div>
   </div>
 </main>
-<% if params[:action] != "caller_login" %>
-<footer><div class="copyright">Copyright@Company Name</div></footer>
-<%end %>
+<footer><div class="copyright">Copyright@Alco Foods PVT LTD.</div></footer>
 </body>
 </html>
 

@@ -42,10 +42,17 @@
                   name="price[<%= index %>]"
                   type="text"
                   placeholder="PRICE"
-                  class="form-control price_[<%= index %>]"
+                  class="form-control product_price price_<%= index %>"
                   style="width: 15%"
                   />
               </div>
+<!--              <input-->
+<!--                name="select_product[<%#= index %>]"-->
+<!--                type="checkbox"-->
+<!--                placeholder="PRICE"-->
+<!--                class="form-control select_product"-->
+<!--                style="width: 15%"-->
+<!--                />-->
             <% end %>
           </div>
         </div>
@@ -110,7 +117,7 @@
               <div class="form-group">
                 <label>Sub-Total</label>&nbsp;&nbsp;
                 &nbsp;
-                <span class="ml-5">&#8377;2,399</span>
+                <span class="ml-5 total"></span>
               </div>
             </div>
           </div>
@@ -133,7 +140,9 @@
         console.log(id);
         var qty = parseInt($(this).val(), 10);
         var price = sku * qty;
-        $(".price_" + id).val(price);
+        // $(".price_" + id).val(price);
+        (parseInt(price)||0) ? $(".price_" + id).val(price) : $(".price_" + id).val("0");
+
     });
     $(".sku_detail").change(function () {
         var id = $(this).next().attr("id");
@@ -146,7 +155,9 @@
         console.log(id);
         console.log(qty);
         console.log(price);
-        $(".price_" + id).val(price);
+        // $(".price_" + id).val(price);
+        (parseInt(price)||0) ? $(".price_" + id).val(price) : $(".price_" + id).val("0");
+
     });
     $(".discount").change(function () {
         var price = $(this).next().val();
@@ -157,5 +168,17 @@
         console.log(discount);
         // console.log(price);
         // $('.price_'+id).val(price);
+    });
+    $('.select_product').on('change', function(){
+        $("#threadTitleCheck").prop("disabled", !this.checked).focus();
+    });
+
+    $(document).on("change", ".product_price", function() {
+        var sum = 0;
+        $(".product_price").each(function(){
+            sum += +$(this).val();
+        });
+        console.log("*****"+sum);
+        $(".total").text(sum);
     });
 </script>

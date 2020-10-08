@@ -1,22 +1,23 @@
-<table>
-  <thead>
-    <tr>Name</tr>
-    <tr>Email Id</tr>
-    <tr>Phone no</tr>
-    <tr>Selling Date</tr>
-    <tr>Total Bill</tr>
-    <tr colspan="2"></tr>
-  </thead>
-  <tbody>
-  <% @res.each do |val| %>
-  <%  debugger%>
-    <tr>
-      <td><%= "#{val['customer_detail'][0].first_name if val['customer_detail'][0].first_name.present?} #{val['customer_detail'][0].last_name if val['customer_detail'][0].last_name.present?}" %></td>
-      <td><%= val['customer_detail'][0].email  if val['customer_detail'][0].email.present?%></td>
-      <td><%= val['customer_detail'][0].phone if val['customer_detail'][0].phone.present?%></td>
-      <td><%= val['order_detail'].created_at if val['order_detail'].created_at.present? %></td>
-      <td><%= val['order_detail'].total if val['order_detail'].total.present? %></td>
-    </tr>
+<div class="table-responsive mt-4">
+  <table class="table table-bordered table-hover text-center">
+    <thead>
+    <th>Name</th>
+    <th>Email Id</th>
+    <th>Phone</th>
+    <th>Selling Date</th>
+    <th>Total Bill</th>
+    </thead>
+    <tbody>
+    <% @res.each do |val| %>
+
+      <tr>
+        <td><%= "#{val['customer_detail'][0].first_name if val['customer_detail'][0].first_name.present?} #{val['customer_detail'][0].last_name if val['customer_detail'][0].last_name.present?}" %></td>
+        <td><%= val['customer_detail'][0].email  if val['customer_detail'][0].email.present?%></td>
+        <td><%= val['customer_detail'][0].phone if val['customer_detail'][0].phone.present?%></td>
+        <td><%= val['order_detail'].created_at if val['order_detail'].created_at.present? %></td>
+        <td><%= val['order_detail'].total if val['order_detail'].total.present? %></td>
+      </tr>
     <%end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
