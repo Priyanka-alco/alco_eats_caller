@@ -21,8 +21,8 @@
   <header>
     <div class="head">
         <span class="item2"
-        ><%= image_tag("alco_eats.png") %>
-        ></span>
+        ><%= image_tag("alco_eats.png",:class => "img_preview") %>
+        </span>
       <span class="item3">Super Admin Dashboard</span>
       <a href="/logout" class="item4">Logout</a>
     </div>
@@ -30,7 +30,7 @@
 <main>
   <div class="container-fluid section">
     <div class="row">
-      <div class="col-md-2 col-sm-2 col-xs-2 sideBar">
+      <div class=" col-md-2 sideBar">
         <ul>
           <% if session[:admin] == true %>
             <li>
@@ -48,14 +48,13 @@
           <% end %>
           <% if session[:admin] != true %>
             <li>
-              <a href="/product_selling">Sell Product</a>
-              <a href="/order">View Orders</a>
-            </li>
+              <a href="/product_selling">Sell Product</a>              
+            </li><li><a href="/order">View Orders</a></li>
           <% end %>
         </ul>
       </div>
   <%end %>
-      <div class="col-md-10 col-sm-10 col-xs-10">
+      <div class="col-md-10 col-sm-10 col-xs-10" >
         <div class="content">
 
           <%= yield %>

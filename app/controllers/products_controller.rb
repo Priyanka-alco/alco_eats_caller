@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
         @result['product'] = res
 
 
-    puts "****#{@result['product']}"
+    # puts "****#{@result['product']}"
         # render json: @result
   end
   def product_selling_detail
