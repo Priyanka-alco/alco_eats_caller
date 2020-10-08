@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :products
   resources :customers
   resources :users
+  resources :charges
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'caller_login',to: 'users#caller_login'
   get 'product_selling',to: 'products#product_selling'

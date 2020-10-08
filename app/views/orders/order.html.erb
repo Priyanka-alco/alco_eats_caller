@@ -16,7 +16,7 @@
           <td><%= "#{val['customer_detail'][0].first_name if val['customer_detail'][0].first_name.present?} #{val['customer_detail'][0].last_name if val['customer_detail'][0].last_name.present?}" %></td>
           <td><%= val['customer_detail'][0].email  if val['customer_detail'][0].email.present?%></td>
           <td><%= val['customer_detail'][0].phone if val['customer_detail'][0].phone.present?%></td>
-          <td><%= val['order_detail'].created_at if val['order_detail'].created_at.present? %></td>
+          <td><%= val['order_detail'].created_at.to_date if val['order_detail'].created_at.present? %></td>
           <td><%= val['order_detail'].total if val['order_detail'].total.present? %></td>
           <td><a href="">View Details</a></td>
         </tr>

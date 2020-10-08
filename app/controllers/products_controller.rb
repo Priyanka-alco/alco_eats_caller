@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  require 'sendgrid-ruby'
+  include SendGrid
   # skip_before_filter :authenticate_request
   # GET /products
   # GET /products.json
@@ -72,6 +74,19 @@ class ProductsController < ApplicationController
     product_name.each_with_index do |val,index|
       OrderDetail.create(:sku_id=>product_sku["#{index}"],:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
+
+
+    from = Email.new(email: 'test@example.com')
+    to = Email.new(email: 'test@example.com')
+    subject = 'Sending with SendGrid is Fun'
+    content = Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
+    mail = Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    puts response.status_code
+    puts response.body
+    puts response.headers
   end
 
   # GET /products/new

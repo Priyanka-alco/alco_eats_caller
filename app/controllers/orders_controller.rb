@@ -31,6 +31,7 @@ class OrdersController < ApplicationController
       result['customer_detail'] = customer_detail
       @res << result
     end
+
   end
   # POST /orders
   # POST /orders.json

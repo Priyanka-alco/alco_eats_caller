@@ -1,98 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title></title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="Styles/bootstrap.min.css" />
-</head>
-<body>
-<main>
-  <!--------------------------------------------------------------------------------------->
-  <div class="content">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a href="#onlineMode" class="nav-link active" data-toggle="tab">
-          Online Mode
-        </a>
-      </li>
-      <!-- <li class="nav-item">
-        <a href="#cod" class="nav-link" data-toggle="tab">
-          Cash On Delivery
-        </a>
-      </li> -->
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane container-fluid active ml-3" id="onlineMode">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mt-4">
-              <div class="card-header">Payment Details</div>
-              <div class="card-body">
-                <form class="form">
+<%= javascript_include_tag "https://js.stripe.com/v1/" , "application" %>
+<%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+<div class="tab-content">
+  <div class="tab-pane container-fluid active ml-3" id="onlineMode">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card mt-4">
+          <div class="card-header">Payment Details</div>
+          <div class="card-body">
+            <form class="form">
+              <div class="form-group">
+                <label>CARD NUMBER</label>
+                <div class="input-group">
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="Valid Card Number"
+                    />
+                  <span class="input-group-addon"
+                  ><span class="fa fa-credit-card"></span
+                  ></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-7 col-md-7">
                   <div class="form-group">
-                    <label>CARD NUMBER</label>
-                    <div class="input-group">
-                      <input
-                        type="tel"
-                        class="form-control"
-                        placeholder="Valid Card Number"
-                        />
-                      <span class="input-group-addon"
-                      ><span class="fa fa-credit-card"></span
-                      ></span>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xs-7 col-md-7">
-                      <div class="form-group">
-                        <label
-                        ><span class="hidden-xs">EXPIRATION</span>
-                          DATE</label
-                        >
-                        <input
-                          type="tel"
-                          class="form-control"
-                          placeholder="MM / YY"
-                          />
-                      </div>
-                    </div>
-                    <div class="col-xs-5 col-md-5 pull-right">
-                      <div class="form-group">
-                        <label>CV CODE</label>
-                        <input
-                          type="tel"
-                          class="form-control"
-                          placeholder="CVC"
-                          />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label>CARD OWNER</label>
+                    <label
+                    ><span class="hidden-xs">EXPIRATION</span>
+                      DATE</label
+                    >
                     <input
-                      type="text"
+                      type="tel"
                       class="form-control"
-                      placeholder="Card Owner Names"
+                      placeholder="MM / YY"
                       />
                   </div>
-                  <button class="btn btn-warning btn-lg btn-block">
-                    Process payment
-                  </button>
-                </form>
+                </div>
+                <div class="col-xs-5 col-md-5 pull-right">
+                  <div class="form-group">
+                    <label>CV CODE</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      placeholder="CVC"
+                      />
+                  </div>
+                </div>
               </div>
-            </div>
+              <div class="form-group">
+                <label>CARD OWNER</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Card Owner Names"
+                  />
+              </div>
+              <button class="btn btn-warning btn-lg btn-block">
+                Process payment
+              </button>
+            </form>
           </div>
         </div>
       </div>
-      <div class="tab-pane container-fluid fade" id="cod"></div>
     </div>
   </div>
-  <!--------------------------------------------------------------------------------------->
-</main>
+  <div class="tab-pane container-fluid fade" id="cod"></div>
+</div>
 
 <script src="js/jquery.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
