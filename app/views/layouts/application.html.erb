@@ -24,7 +24,7 @@
         ><%= image_tag("alco_eats.png") %>
         ></span>
       <span class="item3">Super Admin Dashboard</span>
-      <a href="#" class="item4">Logout</a>
+      <a href="/logout" class="item4">Logout</a>
     </div>
   </header>
 <main>
@@ -40,7 +40,7 @@
               <a href="#">Product List</a>
             </li>
             <li>
-              <a href="#">Discount Lit</a>
+<!--              <a href="#">Discount List</a>-->
             </li>
             <li>
               <a href="#">Customer List</a>
@@ -49,6 +49,7 @@
           <% if session[:admin] != true %>
             <li>
               <a href="/product_selling">Sell Product</a>
+              <a href="/order">View Orders</a>
             </li>
           <% end %>
         </ul>

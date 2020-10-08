@@ -28,4 +28,8 @@ class AuthenticationController < ApplicationController
     end
     redirect_to @res['page']
   end
+
+  def logout
+
+  end
 end

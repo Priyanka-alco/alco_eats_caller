@@ -11,7 +11,7 @@
       </thead>
       <tbody>
       <% @res.each do |val| %>
-        
+
         <tr>
           <td><%= "#{val['customer_detail'][0].first_name if val['customer_detail'][0].first_name.present?} #{val['customer_detail'][0].last_name if val['customer_detail'][0].last_name.present?}" %></td>
           <td><%= val['customer_detail'][0].email  if val['customer_detail'][0].email.present?%></td>
