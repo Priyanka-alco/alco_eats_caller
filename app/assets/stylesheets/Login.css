@@ -1,0 +1,32 @@
+.bodyBackground {
+    background-color: #003460;
+}
+
+.loginCard {
+    border: 1px solid black;
+    width: 60%;
+    height: 500px;
+    margin: auto auto;
+    margin-top: 80px;
+}
+
+.loginFormCard {
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.signUpLink {
+    width: fit-content;
+    margin: 5px auto;
+    text-decoration: none;
+    font-size: medium;
+}
+
+.loginBtn {
+    width: 100%;
+}
+
+.login_img{
+    margin-top:13%;
+    padding-right:5px
+}

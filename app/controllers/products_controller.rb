@@ -41,15 +41,24 @@ class ProductsController < ApplicationController
         # render json: @result
   end
   def product_selling_detail
-    seller = session[:admin] != true ? User.where("email='#{session[:email_id]}' and status =1") :  User.where("status =1")
-    order_detail = Order.where("seller_id=#{seller[0].id}")
-    @res = []
-    order_detail.each do |val|
-      result = {}
-      result['order_detail'] = val
-      customer_detail = Customer.where("id=#{val.id}")
-      result['customer_detail'] = customer_detail
-      @res << result
+    order_id = params['order_id']
+    get_order_detail = OrderDetail.where("order_id=#{order_id}")
+    @result = []
+    order = Order.where("id=#{order_id}")
+    customer_id = order[0].cust_id
+    customer_detail = Customer.where("id=#{customer_id}")
+    @customer_detail = customer_detail
+    # debugger
+    @total_price = order[0].total
+    get_order_detail.each_with_index do |val,index|
+      res = {}
+      res['order_detail']  = val
+      # @result << {"total_price": order.total}
+      # order_detail = Order.where("id=#{order_id}")
+      product_id =   ( index==0) ? index+1 : index
+      product_detail = Product.where("id=#{product_id}")
+      res['product_name'] = product_detail[0].product_name
+      @result << res
     end
   end
   def buy_product
@@ -65,6 +74,8 @@ class ProductsController < ApplicationController
     product_qty = params['qty']
     address = params['address']
     price = params['price']
+
+    # total_price = price.sum{|val| val.to_i}
     create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no,:address=>address)
     create_order = Order.create(:cust_id=>create_customer.id,
                                 :seller_id=>1,
@@ -73,21 +84,10 @@ class ProductsController < ApplicationController
                                 :payment_type=>payment_type)
     puts "********#{create_customer.id}*********#{create_order.id}"
     product_name.each_with_index do |val,index|
-      OrderDetail.create(:sku_id=>product_sku["#{index}"],:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
+      OrderDetail.create(:sku_id=>product_sku["#{index}"],:order_id=>create_order.id,:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
+    redirect_to '/order'
 
-
-    from = Email.new(email: 'test@example.com')
-    to = Email.new(email: 'test@example.com')
-    subject = 'Sending with SendGrid is Fun'
-    content = Content.new(type: 'text/plain', value: 'and easy to do anywhere, even with Ruby')
-    mail = Mail.new(from, subject, to, content)
-
-    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
-    response = sg.client.mail._('send').post(request_body: mail.to_json)
-    puts response.status_code
-    puts response.body
-    puts response.headers
   end
 
   # GET /products/new

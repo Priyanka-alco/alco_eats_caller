@@ -1,23 +1,48 @@
-<div class="table-responsive mt-4">
+<div class="table-responsive mt-4" style="width: fit-content;margin-left: 10%;">
+  <table class="table table-bordered table-hover text-">
+    <tbody>
+    <tr>
+      <td>Name:</td>
+      <td><%= "#{@customer_detail[0].first_name} #{@customer_detail[0].last_name}" %></td>
+    </tr>
+    <tr>
+      <td>Phone No.:</td>
+      <td><%= @customer_detail[0].phone %></td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td><%= @customer_detail[0].address%></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-responsive mt-4" style="width: 80%; margin: 0 auto">
   <table class="table table-bordered table-hover text-center">
     <thead>
-    <th>Name</th>
-    <th>Email Id</th>
-    <th>Phone</th>
-    <th>Selling Date</th>
-    <th>Total Bill</th>
+    <th>S no.</th>
+    <th>Product</th>
+    <th>Sku</th>
+    <th>Quantity</th>
+    <th>Price Per Unit</th>
+    <th>Price</th>
     </thead>
     <tbody>
-    <% @res.each do |val| %>
+    <% @result.each_with_index do |val,index| %>
+    <%   %>
 
       <tr>
-        <td><%= "#{val['customer_detail'][0].first_name if val['customer_detail'][0].first_name.present?} #{val['customer_detail'][0].last_name if val['customer_detail'][0].last_name.present?}" %></td>
-        <td><%= val['customer_detail'][0].email  if val['customer_detail'][0].email.present?%></td>
-        <td><%= val['customer_detail'][0].phone if val['customer_detail'][0].phone.present?%></td>
-        <td><%= val['order_detail'].created_at if val['order_detail'].created_at.present? %></td>
-        <td><%= val['order_detail'].total if val['order_detail'].total.present? %></td>
+        <td><%= index %></td>
+        <td><%= val['product_name'] %></td>
+        <td><%= val["order_detail"].sku_id %></td>
+        <td><%= val["order_detail"].quantity %></td>
+        <td>&#x20B9;<%= val["order_detail"].selling_price.to_i/val["order_detail"].quantity.to_i %></td>
+        <td>&#x20B9;<%= val["order_detail"].selling_price.to_i%></td>
       </tr>
     <%end %>
     </tbody>
   </table>
+
+  <span>Sub Total</span>
+  <span>&#x20B9;<%= @total_price %> 	</span>
 </div>

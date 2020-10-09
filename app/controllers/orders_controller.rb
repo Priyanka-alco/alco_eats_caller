@@ -22,12 +22,14 @@ class OrdersController < ApplicationController
   end
   def order
     seller = session[:admin] != true ? User.where("email='#{session[:email_id]}' and status =1") :  User.where("status =1")
-    order_detail = Order.where("seller_id=#{seller[0].id}")
+    order_detail = Order.where("seller_id=#{seller[0].id}").order( 'id DESC' )
+
     @res = []
     order_detail.each do |val|
+
       result = {}
       result['order_detail'] = val
-      customer_detail = Customer.where("id=#{val.id}")
+      customer_detail = Customer.where("id=#{val.cust_id}")
       result['customer_detail'] = customer_detail
       @res << result
     end

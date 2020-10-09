@@ -1,20 +1,31 @@
 
     <form class="form-inline" action="buy_product" method="post">
+      <div class="container-fluid">
       <div class="row">
         <div class="col-md-8">
           <div class="card mt-4">
             <div class="card-header">Product</div>
+            <table class="table">
+              <tbody>
+              <tr>
+                <td>Product</td>
+                <td>SKU</td>
+                <td>Qty</td>
+                <td>Price</td>
+              </tr>
+              </tbody></table>
             <% @result['product'].each_with_index  do |product,index| %>
               <div class="card-body">
+
                 <input
                   type="text"
                   placeholder="Product"
                   class="form-control"
                   name="product_name[<%= index %>]"
                   value="<%= product['product'].product_name %> "
-                  style="width: 30%"
+
                   />&nbsp;&nbsp;
-                <select
+                <select style="width:15%"
                   class="form-control sku_<%= index %> sku_detail"
                   name="sku[<%= index %>]"
                 >
@@ -23,7 +34,7 @@
                     <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
                   <% end %></select
                 >&nbsp;&nbsp;
-                <select
+                <select  style="width:15%"
                   class="form-control qty"
                   name="qty[<%= index %>]"
                   id="<%= index %>"
@@ -43,7 +54,7 @@
                   type="text"
                   placeholder="PRICE"
                   class="form-control product_price price_<%= index %>"
-                  style="width: 15%"
+
                   />
               </div>
 <!--              <input-->
@@ -57,13 +68,13 @@
           </div>
         </div>
         <div class="col-md-4">
-          <div class="card mt-4">
+          <div class="card mt-4" style="width:fit-content">
             <div class="card-header">Customer</div>
             <div class="card-body">
               <div class="form-group">
                 <input
                   type="text"
-                  name="first_name"
+                  name="first_name" required="true"
                   class="form-control"
                   placeholder="First Name"
                   />
@@ -72,7 +83,7 @@
               <div class="form-group">
                 <input
                   type="text"
-                  name="last_name"
+                  name="last_name" required="true"
                   class="form-control"
                   placeholder="Last Name"
                   />
@@ -92,7 +103,7 @@
                 <input
                   type="tel"
                   name="phone_no"
-                  class="form-control"
+                  class="form-control" required="true"
                   placeholder="Contact Number"
                   />
               </div>
@@ -117,7 +128,7 @@
 <!--              </div>-->
               <br />
               <label>Address</label>
-              <textarea style="width: 232px;" name="address" value="" class="form-control"></textarea>
+              <textarea style="width: 232px;"  required="true" name="address" value="" class="form-control"></textarea>
               <br />
               <br />
               <input
@@ -126,7 +137,7 @@
                 class="form-control"
                 placeholder="city" readonly="true" value="Raipur"
                 />
-              <br />
+              <br /><br/>
               <div class="form-group">
                 <label>Sub-Total</label>&nbsp;&nbsp;
                 &nbsp;
@@ -138,6 +149,7 @@
           <button class="btn btn-dark">Checkout</button>
           </div>
         </div>
+      </div>
       </div>
     </form>
   </div>

@@ -17,7 +17,7 @@
 </head>
 <body>
 
-
+<% if params[:action] != "caller_login" %>
   <header>
     <div class="head">
         <span class="item2"
@@ -58,8 +58,9 @@
       <%end %>
       <div class="col-md-10" >
         <div class="content">
-
+<% end %>
           <%= yield %>
+<% if params[:action] != "caller_login" %>
         </div>
       </div>
     </div>
@@ -71,3 +72,4 @@
 
 </body>
 </html>
+<% end %>

@@ -1,56 +1,58 @@
-<!--<form method="post" action="authenticate">-->
-<!--  <label>Email:</label>-->
-<!--  <input type="text" name="email"><br/>-->
-<!--  <label>Password</label>-->
-<!--  <input type="text" name="password">-->
-<!--  <input type="submit" name="">-->
-<!--</form>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title></title>
-
-<!--  <link rel="stylesheet" href="style.css" />-->
-<!--  <link rel="stylesheet" href="Styles/Login.css" />-->
-<!--  <link rel="stylesheet" href="Styles/bootstrap.min.css" />-->
-<!--   <link-->
-<!--        href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@200&display=swap"-->
-<!--        rel="stylesheet"-->
-<!--      />-->
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+  <link rel="stylesheet" href="Styles/Login.css" />
+  <link rel="stylesheet" href="Styles/bootstrap.min.css" />
+  <!-- <link
+        href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@200&display=swap"
+        rel="stylesheet"
+      /> -->
 </head>
-<body>
-<form class="form mt-5 mr-auto ml-auto" method="post" action="authenticate" style="width:300px">
-  <div class="form-group">
-    <input
-      type="email"
-      class="form-control"
-      placeholder="Email"
-      name="email"
-      />
+<body class="bodyBackground">
+<div class="card loginCard">
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row" style="margin-top:10%;margin-left:2%;margin-right: auto;">
+        <div class="col-md-6 cardCol-1" style="border-right:1px solid black;">
+          <%= image_tag("alco_eats.png",:class => "img-fluid login_img") %>
+          <span style="font-size: 2.3vw;margin-left:47%">Call Center</span>
+        </div>
+        <div class="col-md-6 cardCol-2" style="padding-left: 5%;">
+          <div class="card loginFormCard">
+            <div class="card-header text-center">
+              Sign In
+            </div>
+            <div class="card-body formCard"  method="post" action="authenticate" >
+              <form class="form" method="post" action="authenticate">
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Email" name="email" />
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Password" name="password" />
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn loginBtn" style="background-color: #003460;font-size: 20px;color:white">Login</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--  -->
   </div>
-  <div class="form-group">
-    <input
-      type="password"
-      class="form-control"
-      placeholder="Password"
-      name="password"
-      />
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-dark">Login</button>
-  </div>
-</form>
-<script src="js/jquery.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
+</div>
 </body>
-</html>
+
 <script>
-  <% if params['status'] == "400" %>
-  alert("Please enter correct password");
-  <% end %>
-  <% if params['status'] == "300" %>
-  alert("Please enter correct email id");
-  <% end %>
+    <% if params['status'] == "400" %>
+    alert("Please enter correct password");
+    <% end %>
+    <% if params['status'] == "300" %>
+    alert("Please enter correct email id");
+    <% end %>
 </script>
