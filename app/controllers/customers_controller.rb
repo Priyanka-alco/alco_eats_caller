@@ -12,6 +12,20 @@ class CustomersController < ApplicationController
   def show
   end
 
+  def search_customer
+    # @result = {}
+    # phone_number = params['phone_number']
+    # customer_detail = Customer.where("phone='#{phone_number}'")
+    # if customer_detail
+    #   @result['customer_detail'] = customer_detail
+    #   @result['order_detail'] = Order.where("cust_id=#{customer_detail[0].id}").order( 'id DESC' )
+    # else
+    #   redirect_to '/product_selling'
+    # end
+
+
+  end
+
   # GET /customers/new
   def new
     @customer = Customer.new

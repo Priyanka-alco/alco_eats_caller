@@ -1,0 +1,26 @@
+<div class="col-md-2 sideBar">
+        <div class="row sidebar-menu">
+        <span><h4>Call Center</h4><span>
+        </div>
+        <hr>
+        <div class="row mt-5 cust-info">
+          <a href="#">Customer Information</a>
+        </div>
+        <div class="mt-3 order-info">
+        <ul>
+        <li>
+        <a href="#">Purchase Order</a>
+        <ul class="po-list">
+        <li><a href="#">- Create Purchase Order</a></li>
+        <li><a href="#">- View Purchase Order</a></li>
+        </ul>
+        </li>
+        </ul>
+        </div>
+        <div class="order-info">
+          <a href="#">Create New Customer</a>
+        </div>
+        <div class="logout-btn">
+        <button class="btn">Logout</button>
+        </div>
+      </div>
