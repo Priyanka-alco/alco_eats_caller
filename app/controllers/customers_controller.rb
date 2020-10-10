@@ -13,17 +13,48 @@ class CustomersController < ApplicationController
   end
 
   def search_customer
-    # @result = {}
-    # phone_number = params['phone_number']
-    # customer_detail = Customer.where("phone='#{phone_number}'")
-    # if customer_detail
-    #   @result['customer_detail'] = customer_detail
-    #   @result['order_detail'] = Order.where("cust_id=#{customer_detail[0].id}").order( 'id DESC' )
-    # else
-    #   redirect_to '/product_selling'
-    # end
+    @result = {}
+    phone_number = params['phone_number']
+    if phone_number.present?
+      customer_detail = Customer.where("phone='#{phone_number}'")
+      if customer_detail
+        @result['status'] = 200
+        @result['customer_detail'] = customer_detail
+        @result['order_detail'] = Order.where("cust_id=#{customer_detail[0].id}").order( 'id DESC' )
+      else
+        @result['redirect_to'] = '/product_selling'
+        @result['status'] = 300
+      end
+    end
+  end
 
+  def search_by_phone
+    result = {}
+    phone_number = params['phone_number']
+    customer_detail = Customer.where("phone='#{phone_number}'")
+    if customer_detail
+      result['status'] = 200
+      result['customer_detail'] = customer_detail
+      result['order_detail'] = Order.where("cust_id=#{customer_detail[0].id}").order( 'id DESC' )
+    else
+      result['redirect_to'] = '/product_selling'
+      result['status'] = 300
+    end
+    render :json=> result
+  end
 
+  def edit_customer_detail
+    cust_first_name = params['cust_first_name']
+    cust_last_name = params['cust_last_name']
+    cust_address = params['cust_address']
+    cust_phone = params['cust_phone']
+    customer_detail = Customer.where("phone='#{cust_phone}'")
+
+    customer_detail[0].first_name = cust_first_name
+    customer_detail[0].last_name = cust_last_name
+    customer_detail[0].address = cust_address
+    result = (customer_detail[0].save!) ? true :false
+    render :json=>result
   end
 
   # GET /customers/new

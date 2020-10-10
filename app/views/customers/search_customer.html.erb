@@ -1,13 +1,14 @@
-
-<div class="container-fluid">
-  <div class="row">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container-fluid mt-4">
+  <div class="row ml-1">
     <div class="col-md-3 mr-3">
       <div class="row">
         <div class="card bg-light w-100 card-1">
           <div class="card-body phoneInput">
             <div>Enter Customer Phone Number</div>
+
             <div>
-              <input type="tel" class="form-control text-center">
+              <input type="tel" value = "<%= params['phone_number'].present? ? params['phone_number'] : '' %>" class="form-control text-center customer_number">
             </div>
           </div>
         </div>
@@ -16,24 +17,26 @@
         <div class="card bg-light w-100">
           <div class="card-body custdetails">
             <div class="text-center">Customer Details</div>
+            <div class="edit_cust_detail">Edit</div>
+            <div class="save_cust_detail">Save</div>
             <div class="row">
               <table class="table table-borderless mt-3">
                 <tbody>
                 <tr>
                   <td class="custdetails-info">First Name:</td>
-                  <td>Adit</td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].first_name if params['phone_number'].present? %>" readonly="true" class="cust_first_name"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Last Name:</td>
-                  <td>Agrawal</td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].last_name if params['phone_number'].present? %>" readonly="true" class="cust_last_name"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Address:</td>
-                  <td>54/957, satya prem vihar, mahadev ghat road, sundar nagar, Raipur, C.G</td>
+                  <td ><input type="textarea" value="<%= @result['customer_detail'][0].address if params['phone_number'].present? %>"  readonly="true" class="cust_address"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Phone No:</td>
-                  <td><span>+91 </span><span>9863889678</span></td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].phone if params['phone_number'].present? %>" readonly="true" class="cust_phoneno"></td>
                 </tr>
                 </tbody>
               </table>
@@ -42,29 +45,134 @@
         </div>
       </div>
       <div class="row mt-3">
-        <button class="btn btn-primary p-5 w-100">Create Purchase Order</button>
+        <button class="btn btn-primary p-4 w-100">Create Purchase Order</button>
       </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="row">
         <div class="card bg-light w-100">
           <div class="card-body">
-            <table class="table table-borderless">
-              <thead>
-              <tr>
-                <td>Order</td>
-                <td>Order Date</td>
-                <td>Order Price</td>
-                <td>Action</td>
-              </tr>
-              </thead>
-              <tbody>
-              <tr></tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table table-borderless ">
+                <thead>
+                <tr>
+                  <td>Order</td>
+                  <td>Order Date</td>
+                  <td>Order Price</td>
+                  <td>Action</td>
+                </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="table-responsive order-table">
+              <table class="table table-borderless">
+
+                <tbody class="order_detail">
+                <% if params['phone_number'].present? %>
+                  <% @result['order_detail'].each do |val| %>
+                    <tr>
+                      <td>#PO<%= val.id %></td>
+                      <td><%= val.created_at %></td>
+                      <td><%= val.total %></td>
+                      <td><a href="product_selling?order_id=<%= val.id %>">View Details</a></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+    <% if params['phone_number'].present? %>
+    $('.custdetails').show();
+    <% else %>
+      $('.custdetails').hide();
+    <% end %>
+
+    $('.customer_number').change(function(){
+        var phone_number = $(this).val();
+        var data = {
+            phone_number: phone_number,
+        }
+        var new_url = "/product_selling?status=3";
+        $.ajax({
+            url:"/search_by_phone",
+            method: "POST",
+            data: data,
+            success: function(data){
+                $('.custdetails').show();
+
+                if (data['status'] == 200){
+                    $('.cust_first_name').val(data['customer_detail'][0]['first_name']);
+                    $('.cust_last_name').val(data['customer_detail'][0]['last_name']);
+                    $('.cust_address').val(data['customer_detail'][0]['address']);
+                    $('.cust_phoneno').val(data['customer_detail'][0]['phone']);
+                    $.each(data['order_detail'], function( index, val ) {
+                        var order_date =  val.created_at ? val.created_at.split('T') : [''];
+                        $('.order_detail').append(" <tr>" +
+                            "<td> #PO"+index+"</td>" +
+                            "<td>"+order_date[0]+"</td>" +
+                            "<td>"+val.total+"</td>" +
+                            "<td><a href="+new_url+">View Details</a></td>" +
+                            "</tr>");
+                    });
+                    console.log(data);
+                }else{
+                    window.location.replace('/product_selling?status=3')
+                }
+                },
+            error: function(data){
+                window.location.replace('/product_selling?status=3')
+            }
+        });
+
+
+    })
+    $('.save_cust_detail').hide();
+    // readonly false for customer detail
+    $('.edit_cust_detail').click(function(){
+        $('.cust_first_name').prop('readonly', false);
+        $('.cust_last_name').prop('readonly', false);
+        $('.cust_address').prop('readonly', false);
+        $('.save_cust_detail').show();
+    });
+
+    //edit customer detail on click of submit
+    $('.save_cust_detail').click(function(){
+        if(confirm("Are you Sure to Edit Customer Detail?")){
+            var cust_first_name = $('.cust_first_name').val();
+            var cust_last_name = $('.cust_last_name').val();
+            var cust_address = $('.cust_address').val();
+            var cust_phone = $('.cust_phoneno').val();
+            var data = {
+                cust_first_name : cust_first_name,
+                cust_last_name : cust_last_name,
+                cust_address : cust_address,
+                cust_phone:cust_phone
+        }
+            $.ajax({
+                url:"/edit_customer_detail",
+                method: "POST",
+                data: data,
+                success: function(data){
+                    $('.custdetails').show();
+                    if (data == true){
+                        window.location.replace('/search_customer?phone_number='+cust_phone);
+                    }else{
+                        alert("Please contact to technical team");
+                    }
+                },
+                error: function(data){
+                    alert("Please contact to technical team");
+                }
+            });
+        }
+    })
+
+</script>

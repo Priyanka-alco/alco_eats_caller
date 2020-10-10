@@ -1,4 +1,6 @@
 
+
+
     <form class="form-inline" action="buy_product" method="post">
       <div class="container-fluid">
       <div class="row">
@@ -206,4 +208,7 @@
         console.log("*****"+sum);
         $(".total").text(sum);
     });
+    <% if params['status'] == "3" %>
+    alert("Please Enter Detail of new Customer");
+    <% end %>
 </script>

@@ -1,15 +1,15 @@
 * {
-    font-weight: 600;
+    font-weight: 500;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-.container-fluid .row {
-    margin-top: 1%;
-    margin-left: 1%;
+.order-table {
+    display: block;
+    height: 500px;
+    overflow-y: scroll;
 }
-
 .card {
     border-radius: 10px;
 }
@@ -29,5 +29,5 @@
 }
 
 .custdetails-info {
-    width: 30%;
+    width: 40%;
 }

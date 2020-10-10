@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   get 'customer_buy_detail' , to:'products#customer_buy_detail'
   post 'authenticate', to: 'authentication#authenticate'
   post 'buy_product', to: 'products#buy_product'
+  post 'search_by_phone', to: 'customers#search_by_phone'
+  post 'edit_customer_detail', to: 'customers#edit_customer_detail'
 end
