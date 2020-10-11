@@ -42,22 +42,17 @@
             <div class="card-header">
               Buy Products
             </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-borderless text-center">
-                  <thead>
-                  <tr>
-                    <td>Name</td>
-                    <td>Weight</td>
-                    <td>Quantity</td>
-                    <td>Price</td>
-                  </tr>
-                  </thead>
-                </table>
-              </div>
+            <div class="card-body">              
               <div class="table-responsive order-table">
                 <table class="table table-borderless">
-
+                  <thead class="table-header thead-light">
+                    <tr>
+                        <th class="table-header" scope="col">Name</th>
+                        <th class="table-header" scope="col">Weight</th>
+                        <th class="table-header" scope="col">Quantity</th>
+                        <th class="table-header" scope="col">Price</th>
+                        </tr>
+                    </thead>
                   <tbody>
                   <% if  @result['product'].present? %>
                     <% @result['product'].each_with_index  do |product,index| %>
@@ -83,7 +78,7 @@
                           </select>
                         </td>
                         <td>
-                          <input type="text" read_only="true" class="form-control price_<%= index %>" name="price[<%= index %>]">
+                          <input type="text" read_only="true" class="w-50 form-control price_<%= index %>" name="price[<%= index %>]">
                         </td>
                       </tr>
                     <% end %>

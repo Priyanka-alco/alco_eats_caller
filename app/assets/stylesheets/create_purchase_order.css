@@ -1,53 +1,58 @@
 * {
-    font-weight: 600;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .order-table {
-    display: block;
-    height: 290px;
-    overflow-y: auto;
+  display: block;
+  height: 290px;
+  overflow-y: auto;
 }
 
 .card {
-    border-radius: 10px;
+  border-radius: 10px;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
 }
 
 .table thead {
-    border-bottom: 1px solid;
-    border-color: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid;
+  border-color: rgba(0, 0, 0, 0.4);
 }
 
 .phoneInput div:first-of-type {
-    text-align: center;
-    margin-bottom: 15px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .phoneInput input {
-    height: 50px;
+  height: 50px;
 }
 
 .custdetails-info {
-    width: 40%;
+  width: 40%;
 }
 
 .custdetails hr {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 70%;
-    margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 70%;
+  margin: 0 auto;
 }
 
 .payment-tag-title {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .payment-tag {
-    background-color: #003460;
-    border-radius: 10px;
+  background-color: #003460;
+  border-radius: 10px;
 }
 
 .payment-tag span {
-    color: white;
+  color: white;
 }
