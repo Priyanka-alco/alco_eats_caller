@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201007091328) do
+ActiveRecord::Schema.define(version: 20201011094052) do
+
+  create_table "card_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "cust_id"
+    t.string   "card_number"
+    t.string   "expiry_date"
+    t.string   "cvc_code"
+    t.string   "cardholder_name"
+    t.boolean  "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "city_name"
@@ -40,8 +51,10 @@ ActiveRecord::Schema.define(version: 20201007091328) do
     t.integer  "city"
     t.string   "pincode"
     t.boolean  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.date     "dob"
+    t.date     "anniversary"
   end
 
   create_table "discounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -55,6 +68,7 @@ ActiveRecord::Schema.define(version: 20201007091328) do
     t.boolean  "status"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.float    "discount_percentage", limit: 24
   end
 
   create_table "discounts_products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -78,12 +92,21 @@ ActiveRecord::Schema.define(version: 20201007091328) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "cust_id"
-    t.float    "total",       limit: 24
+    t.float    "total",        limit: 24
     t.integer  "discount_id"
     t.integer  "seller_id"
     t.integer  "status"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "payment_type"
+  end
+
+  create_table "paytm_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "phone_number"
+    t.integer  "cust_id"
+    t.boolean  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "product_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

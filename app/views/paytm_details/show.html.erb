@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @paytm_detail.phone_number %>
+</p>
+
+<p>
+  <strong>Cust:</strong>
+  <%= @paytm_detail.cust_id %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @paytm_detail.status %>
+</p>
+
+<%= link_to 'Edit', edit_paytm_detail_path(@paytm_detail) %> |
+<%= link_to 'Back', paytm_details_path %>

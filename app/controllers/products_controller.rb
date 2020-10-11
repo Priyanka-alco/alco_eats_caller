@@ -93,6 +93,7 @@ class ProductsController < ApplicationController
   end
 
   def update_order_status
+
     order_id = params['order_id']
     get_order = Order.where("id=#{order_id}")
 
@@ -122,6 +123,7 @@ class ProductsController < ApplicationController
     @customer_detail = customer_detail
     # debugger
     @total_price = order[0].total
+    @payment_type = order[0].payment_type
     get_order_detail.each_with_index do |val,index|
       res = {}
       res['order_detail']  = val

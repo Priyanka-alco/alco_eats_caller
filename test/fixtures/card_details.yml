@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cust_id: 1
+  card_number: MyString
+  expiry_date: MyString
+  cvc_code: MyString
+  cardholder_name: MyString
+  status: false
+
+two:
+  cust_id: 1
+  card_number: MyString
+  expiry_date: MyString
+  cvc_code: MyString
+  cardholder_name: MyString
+  status: false

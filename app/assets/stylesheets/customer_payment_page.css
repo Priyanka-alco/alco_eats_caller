@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-weight: 600;
+}
+
+header {
+    padding: 10px;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.4);
+    background-color: #003460;
+    box-shadow: 1px 1px black;
+    font-size: 18px;
+}
+
+.logo {
+    display: inline-block;
+    margin-left: 2%;
+}
+
+.img-preview {
+    width: 150px;
+}
+
+.order-table {
+    display: block;
+    height: 400px;
+    overflow-y: auto;
+    overflow-wrap: break-word;
+}
+
+.order-table-name {
+    width: 35%;
+}
+
+#payment-btn {
+    color: #ff6633;
+    background-color: #003460;
+}

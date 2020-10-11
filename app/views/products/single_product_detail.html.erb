@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="container-fluid mt-4">
   <% if params['view_detail'].present? && params['view_detail'] == "true" %>
     <div class="row title-msg">
@@ -66,13 +67,14 @@
                 <%end %>
               </tbody>
             </table>
+            <input type="hidden" class="get_order_id" value="<%= @result[0]["order_detail"].order_id.to_i%>">
+            <input type="hidden" class="payment_type" value="<%= @payment_type.present? ? @payment_type : ''%>">
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!--view_detail-->
 
 <% if params['view_detail'].present? && params['view_detail'] == "true" %>
   <div class="row mt-5 finalCheck-btn ml-auto mr-auto">
@@ -89,15 +91,46 @@
   </div>
 <% end %>
 
+<!--spinner-->
+<!--<div class="spinner-border text-primary" role="status"> <span class="sr-only">Loading...</span> </div>-->
+<div class="cod_popup" id="cod_popup">
+  <div class="card border-0 popup-cardbody">
+    <div class="card-body">
+      <div class="row justify-content-end">
+        <span class="mr-2"><a href="#"  class="btn close text-white ">&times;</a></span>
+      </div>
+      <div class="row mt-4 text-white h5 justify-content-center">
+        <span>Are you Sure you want to save the details?</span>
+        <button class="btn save_yes btn-light">Yes</button>
+        <button class="btn close btn-light">NO</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
+    // ======close modal=======
+    $('.close').click(function(){
+        $('#common_comdal').hide();
+    })
+    // ======close modal=======
+  $('.cod_popup').hide();
+  // $('.spinner-border').hide();
     $('.confirm_order').click(function(){
         var order_id = $('.get_order_id').val();
-        var data = {order_id:order_id};
+        var payment_type = $('.payment_type').val();
+        var data = {order_id:order_id,payment_type:payment_type};
         $.ajax({
             url:"/update_order_status",
             method: "POST",
             data: data,
             success: function(data){
+                if (payment_type == "2"){ //cod
+                    $('.cod_popup').show();
+                }else{ //online
+                    window.location.replace('/customer_payment_page?order_id='+order_id);
+                }
+                // $('.spinner-border').show();
+
                 console.log(data);
             },
             error: function(data){

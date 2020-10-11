@@ -1,0 +1,2 @@
+class PaytmDetail < ApplicationRecord
+end

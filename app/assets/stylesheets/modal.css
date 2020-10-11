@@ -1,0 +1,74 @@
+* {
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.order-table {
+    display: block;
+    height: 500px;
+    overflow-y: auto;
+}
+
+.detail-card {
+    border-radius: 10px;
+}
+
+.table-header {
+    position: sticky;
+    top: 0;
+}
+
+.table thead {
+    border-bottom: 1px solid;
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.phoneInput div:first-of-type {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.phoneInput input {
+    height: 50px;
+}
+
+.custdetails-info {
+    width: 40%;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 150px;
+    left: 38%;
+    z-index: 1;
+    width: fit-content;
+    z-index: 20;
+}
+
+#common_comdal:after {
+    position: fixed;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -2;
+}
+
+.popup-cardbody {
+    border: none;
+    background-color: #003460;
+    width: 400px;
+    height: 150px;
+}
+
+.quality-check {
+    width: 120px;
+    height: 120px;
+    opacity: 0.9;
+    margin: 2px auto;
+}

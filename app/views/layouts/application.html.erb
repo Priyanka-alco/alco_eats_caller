@@ -28,7 +28,7 @@
     <div class="container-fluid section">
       <div class="row">
 
-        <% if params[:action] != "caller_login" %>
+        <% if (params[:action] != "caller_login") && (params[:action] != "customer_payment_page") && (params[:action] != "payment_acknowledgement")  %>
           <div class="col-md-2 sideBar">
             <div class="row sidebar-menu">
         <span><h4>Call Center</h4><span>

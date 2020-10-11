@@ -12,6 +12,64 @@ class OrdersController < ApplicationController
   def show
   end
 
+  def payment
+    card_number = params['card_number']
+    expiry_date = params['expiry_date']
+    cvc = params['cvc']
+    card_holder_name = params['card_holder_name']
+    payment_method = params['payment_method']
+    cust_id = params['cust_id']
+    order_id = params['order_id']
+    if payment_method == "1"
+      # (pay via card)
+      create_card = CardDetail.create(:card_number => card_number,
+                        :expiry_date => expiry_date,
+                        :cvc_code => cvc,
+                        :cardholder_name => card_holder_name,
+                        :cust_id => cust_id)
+
+    else
+      # (pay via paytm)
+    end
+    order_id = params['order_id']
+    order_status = 3
+    get_order = Order.where("id=#{order_id}")
+    get_order_detail = OrderDetail.where("order_id=#{order_id}")
+    get_order[0].status = order_status
+    get_order[0].save!
+    get_order_detail.each do |order_detail|
+      order_detail.status = order_status
+      order_detail.save!
+    end
+    redirect_to '/payment_acknowledgement'
+  end
+
+  def payment_acknowledgement
+
+  end
+
+  def customer_payment_page
+    order_id = params['order_id']
+    get_order_detail = OrderDetail.where("order_id=#{order_id}")
+    @result = []
+    order = Order.where("id=#{order_id}")
+    customer_id = order[0].cust_id
+    customer_detail = Customer.where("id=#{customer_id}")
+    @customer_detail = customer_detail
+    # debugger
+    @total_price = order[0].total
+    get_order_detail.each_with_index do |val,index|
+      res = {}
+      res['order_detail']  = val
+      # @result << {"total_price": order.total}
+      # order_detail = Order.where("id=#{order_id}")
+      product_id =   ( index==0) ? index+1 : index
+      product_detail = Product.where("id=#{product_id}")
+      res['product_name'] = product_detail[0].product_name
+      @result << res
+    end
+  end
+
   # GET /orders/new
   def new
     @order = Order.new
