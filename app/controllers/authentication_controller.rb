@@ -8,10 +8,13 @@ class AuthenticationController < ApplicationController
     if check_user[0]
       if check_user[0].password_digest == params['password']
         @res['success'] = true
-        @res['page'] =  '/product_selling?status=200'
-        session[:current_user_id] = params['email']
+        @res['page'] =  '/search_customer?status=200'
+
+        session[:current_user_id] = check_user[0].id
+        session[:email] = params['email']
         session[:admin] = true if  params['email'] == "admin@gmail.com"
-        session[:email_id] = params['email']
+        session[:name] = "#{check_user[0].first_name} #{check_user[0].last_name}"
+        session[:email_id] = check_user[0].email
         # puts "**************session***#{session[:current_user_id]}"
         @res['message'] = "Loggedin Successfully"
       else
@@ -22,7 +25,7 @@ class AuthenticationController < ApplicationController
       @res['status'] = 200
     else
       @res['success'] = false
-      @res['page'] = '/caller_login?status=300'
+      @res['page'] = '/search_customer?status=300'
       @res['message'] = "Please enter correct email id"
       @res['status'] = 400
     end
@@ -30,6 +33,7 @@ class AuthenticationController < ApplicationController
   end
 
   def logout
-
+    reset_session
+    redirect_to '/caller_login'
   end
 end

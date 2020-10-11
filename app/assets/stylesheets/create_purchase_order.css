@@ -1,5 +1,5 @@
 * {
-    font-weight: 500;
+    font-weight: 600;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -7,9 +7,10 @@
 
 .order-table {
     display: block;
-    height: 500px;
+    height: 290px;
     overflow-y: auto;
 }
+
 .card {
     border-radius: 10px;
 }
@@ -30,4 +31,23 @@
 
 .custdetails-info {
     width: 40%;
+}
+
+.custdetails hr {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 70%;
+    margin: 0 auto;
+}
+
+.payment-tag-title {
+    font-size: 20px;
+}
+
+.payment-tag {
+    background-color: #003460;
+    border-radius: 10px;
+}
+
+.payment-tag span {
+    color: white;
 }

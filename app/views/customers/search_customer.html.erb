@@ -1,3 +1,4 @@
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="container-fluid mt-4">
   <div class="row ml-1">
@@ -17,26 +18,26 @@
         <div class="card bg-light w-100">
           <div class="card-body custdetails">
             <div class="text-center">Customer Details</div>
-            <div class="edit_cust_detail">Edit</div>
-            <div class="save_cust_detail">Save</div>
+            <button class="edit_cust_detail btn btn-info text-white">Edit</button>
+            <button class="save_cust_detail btn btn-info float-right text-white">Save</button>
             <div class="row">
               <table class="table table-borderless mt-3">
                 <tbody>
                 <tr>
                   <td class="custdetails-info">First Name:</td>
-                  <td ><input type="text" value="<%= @result['customer_detail'][0].first_name if params['phone_number'].present? %>" readonly="true" class="cust_first_name"></td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].first_name if params['phone_number'].present? %>" readonly="true" class="form-control cust_first_name"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Last Name:</td>
-                  <td ><input type="text" value="<%= @result['customer_detail'][0].last_name if params['phone_number'].present? %>" readonly="true" class="cust_last_name"></td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].last_name if params['phone_number'].present? %>" readonly="true" class="form-control  cust_last_name"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Address:</td>
-                  <td ><input type="textarea" value="<%= @result['customer_detail'][0].address if params['phone_number'].present? %>"  readonly="true" class="cust_address"></td>
+                  <td ><input type="textarea" value="<%= @result['customer_detail'][0].address if params['phone_number'].present? %>"  readonly="true" class="form-control  cust_address"></td>
                 </tr>
                 <tr>
                   <td class="custdetails-info">Phone No:</td>
-                  <td ><input type="text" value="<%= @result['customer_detail'][0].phone if params['phone_number'].present? %>" readonly="true" class="cust_phoneno"></td>
+                  <td ><input type="text" value="<%= @result['customer_detail'][0].phone if params['phone_number'].present? %>" readonly="true" class="form-control  cust_phoneno"></td>
                 </tr>
                 </tbody>
               </table>
@@ -45,7 +46,7 @@
         </div>
       </div>
       <div class="row mt-3">
-        <button class="btn btn-primary p-4 w-100">Create Purchase Order</button>
+        <button class="btn btn-primary p-4 w-100 text-white"><a href="/product_selling">Create Purchase Order</a></button>
       </div>
     </div>
     <div class="col-md-6">
@@ -74,7 +75,7 @@
                       <td>#PO<%= val.id %></td>
                       <td><%= val.created_at %></td>
                       <td><%= val.total %></td>
-                      <td><a href="product_selling?order_id=<%= val.id %>">View Details</a></td>
+                      <td><a href="single_product_detail?order_id=<%= val.id %>">View Details</a></td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -94,13 +95,12 @@
     <% else %>
       $('.custdetails').hide();
     <% end %>
-
     $('.customer_number').change(function(){
         var phone_number = $(this).val();
         var data = {
             phone_number: phone_number,
         }
-        var new_url = "/product_selling?status=3";
+
         $.ajax({
             url:"/search_by_phone",
             method: "POST",
@@ -109,11 +109,13 @@
                 $('.custdetails').show();
 
                 if (data['status'] == 200){
+
                     $('.cust_first_name').val(data['customer_detail'][0]['first_name']);
                     $('.cust_last_name').val(data['customer_detail'][0]['last_name']);
                     $('.cust_address').val(data['customer_detail'][0]['address']);
                     $('.cust_phoneno').val(data['customer_detail'][0]['phone']);
                     $.each(data['order_detail'], function( index, val ) {
+                        var new_url = "/single_product_detail?order_id="+val.id;
                         var order_date =  val.created_at ? val.created_at.split('T') : [''];
                         $('.order_detail').append(" <tr>" +
                             "<td> #PO"+index+"</td>" +

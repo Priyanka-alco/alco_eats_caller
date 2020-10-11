@@ -16,7 +16,14 @@ class ProductsController < ApplicationController
 
   def product_selling
     # render layout: true
-    @result = {}
+        @result = {}
+        if params['phone_number'].present?
+          phone_number = params['phone_number']
+          customer_detail = Customer.where("phone='#{phone_number}'")
+          if customer_detail
+            @result['customer_detail'] = customer_detail
+          end
+        end
         product_id = params['product_id']
         start_time = Time.now
         product = Product.active_product
@@ -74,25 +81,31 @@ class ProductsController < ApplicationController
     product_qty = params['qty']
     address = params['address']
     price = params['price']
-
-    # total_price = price.sum{|val| val.to_i}
+    debugger
+    arr_price = price.values
+    total_price = arr_price.map(&:to_f).reduce(:+)
     create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no,:address=>address)
     create_order = Order.create(:cust_id=>create_customer.id,
                                 :seller_id=>1,
-                                :total=>1500,
+                                :total=>total_price,
                                 :status=>1,
                                 :payment_type=>payment_type)
     puts "********#{create_customer.id}*********#{create_order.id}"
     product_name.each_with_index do |val,index|
       OrderDetail.create(:sku_id=>product_sku["#{index}"],:order_id=>create_order.id,:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
-    redirect_to '/order'
+
+    redirect_to '/confirmation_page?order_id='+create_order.id
 
   end
 
   # GET /products/new
   def new
     @product = Product.new
+  end
+
+  def single_product_detail
+
   end
 
   # GET /products/1/edit

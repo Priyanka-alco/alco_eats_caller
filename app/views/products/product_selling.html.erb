@@ -1,214 +1,174 @@
 
+<form action="buy_product" method="post">
+  <div class="container-fluid mt-4">
+    <div class="row ml-1">
+      <div class="col-md-3 mr-3">
+        <div class="row">
+          <div class="card bg-light w-100">
+            <div class="card-body custdetails">
+              <div class="text-center">Customer Details</div>
+              <hr>
+              <div class="row">
+                <table class="table table-borderless mt-3">
 
+                  <tbody>
+                  <tr>
+                    <td class="custdetails-info">First Name:</td>
+                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].first_name : '' %>" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td class="custdetails-info">Last Name:</td>
+                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].last_name : '' %>" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td class="custdetails-info">Address:</td>
+                    <td><textarea class="form-control" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].address : '' %>" style="height: 150px;"></textarea></td>
+                  </tr>
+                  <tr>
+                    <td class="custdetails-info">Phone No:</td>
+                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].phone : '' %>" class="form-control customer_number"></td>
+                  </tr>
+                  </tbody>
 
-    <form class="form-inline" action="buy_product" method="post">
-      <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card mt-4">
-            <div class="card-header">Product</div>
-            <table class="table">
-              <tbody>
-              <tr>
-                <td>Product</td>
-                <td>SKU</td>
-                <td>Qty</td>
-                <td>Price</td>
-              </tr>
-              </tbody></table>
-            <% @result['product'].each_with_index  do |product,index| %>
-              <div class="card-body">
-
-                <input
-                  type="text"
-                  placeholder="Product"
-                  class="form-control"
-                  name="product_name[<%= index %>]"
-                  value="<%= product['product'].product_name %> "
-
-                  />&nbsp;&nbsp;
-                <select style="width:15%"
-                  class="form-control sku_<%= index %> sku_detail"
-                  name="sku[<%= index %>]"
-                >
-                  <option disabled selected>SKU</option>
-                  <% product['product_detail'].each do |product_detail_val| %>
-                    <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
-                  <% end %></select
-                >&nbsp;&nbsp;
-                <select  style="width:15%"
-                  class="form-control qty"
-                  name="qty[<%= index %>]"
-                  id="<%= index %>"
-                >
-                  <option disabled selected>QTY</option>
-                  <% (1..10).each do |val| %>
-                    <option value="<%=val %>"><%=val %></option>
-                  <% end %></select
-                >&nbsp;&nbsp;
-                <!--          <select class="form-control discount discount_" style="width: 18%">-->
-                <!--            <option disabled selected>DISCOUNT</option>-->
-                <!--              <option value=""></option>-->
-                <!--            </select-->
-                <!--          >&nbsp;&nbsp;-->
-                <input
-                  name="price[<%= index %>]"
-                  type="text"
-                  placeholder="PRICE"
-                  class="form-control product_price price_<%= index %>"
-
-                  />
-              </div>
-<!--              <input-->
-<!--                name="select_product[<%#= index %>]"-->
-<!--                type="checkbox"-->
-<!--                placeholder="PRICE"-->
-<!--                class="form-control select_product"-->
-<!--                style="width: 15%"-->
-<!--                />-->
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mt-4" style="width:fit-content">
-            <div class="card-header">Customer</div>
-            <div class="card-body">
-              <div class="form-group">
-                <input
-                  type="text"
-                  name="first_name" required="true"
-                  class="form-control"
-                  placeholder="First Name"
-                  />
-              </div>
-              <br />
-              <div class="form-group">
-                <input
-                  type="text"
-                  name="last_name" required="true"
-                  class="form-control"
-                  placeholder="Last Name"
-                  />
-              </div>
-              <br />
-<!--              <div class="form-group">-->
-<!--                <input-->
-<!--                  type="email"-->
-<!--                  name="email"-->
-<!--                  class="form-control"-->
-<!--                  placeholder="Email"-->
-<!--                  />-->
-<!--              </div>-->
-<!--              <br />-->
-
-              <div class="form-group">
-                <input
-                  type="tel"
-                  name="phone_no"
-                  class="form-control" required="true"
-                  placeholder="Contact Number"
-                  />
-              </div>
-<!--              <label>Anniversary Date</label>-->
-<!--              <div class="form-group">-->
-<!--                <input-->
-<!--                  type="date"-->
-<!--                  name="dob"-->
-<!--                  class="form-control"-->
-<!--                  placeholder="DOB"-->
-<!--                  />-->
-<!--              </div>-->
-<!--              <br />-->
-<!--              <label>Date Of Birth</label>-->
-<!--              <div class="form-group">-->
-<!--                <input-->
-<!--                  type="date"-->
-<!--                  name="dob"-->
-<!--                  class="form-control"-->
-<!--                  placeholder="Date of Birth"-->
-<!--                  />-->
-<!--              </div>-->
-              <br />
-              <label>Address</label>
-              <textarea style="width: 232px;"  required="true" name="address" value="" class="form-control"></textarea>
-              <br />
-              <br />
-              <input
-                type="tel"
-                name="address"
-                class="form-control"
-                placeholder="city" readonly="true" value="Raipur"
-                />
-              <br /><br/>
-              <div class="form-group">
-                <label>Sub-Total</label>&nbsp;&nbsp;
-                &nbsp;
-                <span class="ml-5 total"></span>
+                </table>
               </div>
             </div>
           </div>
-          <div class="mt-3">
-          <button class="btn btn-dark">Checkout</button>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="card bg-light w-100">
+            <div class="card-header">
+              Buy Products
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-borderless text-center">
+                  <thead>
+                  <tr>
+                    <td>Name</td>
+                    <td>Weight</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="table-responsive order-table">
+                <table class="table table-borderless">
+
+                  <tbody>
+                  <% if  @result['product'].present? %>
+                    <% @result['product'].each_with_index  do |product,index| %>
+                      <tr>
+                        <td>
+                          <input type="text" name="product_name[<%= index %>]" value="<%= product['product'].product_name %> " class="form-control">
+                        </td>
+                        <td>
+                          <select  class="form-control sku_<%= index %> sku_detail" name="sku[<%= index %>]">
+                            <option disabled selected>SKU</option>
+                            <% product['product_detail'].each do |product_detail_val| %>
+                              <option value="<%=product_detail_val.id %>"><%=product_detail_val.sku %></option>
+                            <% end %>
+                          </select>
+                          <input type="hidden" value="<%= index %>">
+                        </td>
+                        <td >
+                          <select   class="form-control qty qty_<%= index %>" name="qty[<%= index %>]" id="<%= index %>">
+                            <option disabled selected>QTY</option>
+                            <% (1..10).each do |val| %>
+                              <option value="<%=val %>"><%=val %></option>
+                            <% end %>
+                          </select>
+                        </td>
+                        <td>
+                          <input type="text" read_only="true" class="form-control price_<%= index %>" name="price[<%= index %>]">
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="row ml-1 mt-2 mb-3">
+      <div class="col-md-6 mr-3">
+        <div class="row">
+          <div class="card bg-light w-100 pb-4">
+            <div class="card-body payment-tag-title">
+              <div class="text-center">Select Payment Method</div>
+              <div class="row justify-content-center mt-4">
+                <div class="col-md-5 mr-3 payment-tag p-4">
+                  <input type="radio" name="payment_type" value="1">
+                  <span class="ml-3">
+                                        Online Payment
+                                    </span>
+                </div>
+                <div class="col-md-5 payment-tag p-4">
+                  <input type="radio" name="payment_type" value="2">
+                  <span class="ml-3">
+                                        Cash On Delivery
+                                    </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </form>
+      <div class="col-md-4">
+        <div class="row">
+          <button class="btn btn-primary w-100 mb-2 p-5">
+            Checkout
+          </button>
+        </div>
+        <div class="row">
+          <button class="btn btn-danger w-100 p-4">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
 
+</form>
 <script>
+    <% if params['status'] == "3" %>
+      alert("Create new Purchase Order");
+    <% end %>
     $(".qty").change(function () {
         var id = $(this).attr("id");
         var sku = parseInt(
             $(".sku_" + id + " option:selected").text(),
             10
         );
-        console.log(id);
+        // console.log("*****"+id);
+        // console.log("*****"+sku);
         var qty = parseInt($(this).val(), 10);
         var price = sku * qty;
-        // $(".price_" + id).val(price);
+        $(".price_" + id).val(price);
         (parseInt(price)||0) ? $(".price_" + id).val(price) : $(".price_" + id).val("0");
 
     });
     $(".sku_detail").change(function () {
-        var id = $(this).next().attr("id");
+        var id = $(this).next().val();
         var sku = parseInt(
             $(".sku_" + id + " option:selected").text(),
             10
         );
-        var qty = parseInt($(this).next().val(), 10);
+        var qty = parseInt($('.qty_'+id).val(), 10);
         var price = sku * qty;
-        console.log(id);
-        console.log(qty);
-        console.log(price);
+        // console.log("*****"+id);
+        // console.log("*****"+sku);
+        // console.log("*****"+qty);
         // $(".price_" + id).val(price);
         (parseInt(price)||0) ? $(".price_" + id).val(price) : $(".price_" + id).val("0");
 
     });
-    $(".discount").change(function () {
-        var price = $(this).next().val();
-        var discount = parseInt($(this).text(), 10);
-        // var qty = parseInt($(this).next().val(),10);
-        // var price = sku*qty;
-        console.log(price);
-        console.log(discount);
-        // console.log(price);
-        // $('.price_'+id).val(price);
-    });
-    $('.select_product').on('change', function(){
-        $("#threadTitleCheck").prop("disabled", !this.checked).focus();
-    });
-
-    $(document).on("change", ".product_price", function() {
-        var sum = 0;
-        $(".product_price").each(function(){
-            sum += +$(this).val();
-        });
-        console.log("*****"+sum);
-        $(".total").text(sum);
-    });
-    <% if params['status'] == "3" %>
-    alert("Please Enter Detail of new Customer");
-    <% end %>
 </script>
