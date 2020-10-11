@@ -7,7 +7,14 @@
 
 .order-table {
   display: block;
-  height: 500px;
+  height: 370px;
+  overflow-y: auto;
+}
+
+.order-table-1 {
+  display: block;
+  /* height: 370px; */
+  height: 480px;
   overflow-y: auto;
 }
 
@@ -48,7 +55,7 @@
   z-index: 20;
 }
 
-#popup2:after {
+#common_comdal:after {
   position: fixed;
   content: "";
   top: 0;
@@ -63,7 +70,7 @@
   border: none;
   background-color: #003460;
   width: 400px;
-  height: 150px;
+  height: 180px;
 }
 
 .quality-check {
