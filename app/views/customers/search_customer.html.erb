@@ -1,5 +1,4 @@
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="container-fluid mt-4">
   <div class="row ml-1">
     <div class="col-md-3 mr-3">
@@ -10,6 +9,7 @@
 
             <div>
               <input type="tel" value = "<%= params['phone_number'].present? ? params['phone_number'] : '' %>" class="form-control text-center customer_number">
+              <input type="hidden" value = "" class="form-control text-center cust_id">
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="row mt-3">
-        <button class="btn btn-primary p-4 w-100 text-white create_po"><a href="/product_selling">Create Purchase Order</a></button>
+        <button class="btn btn-primary p-4 w-100 text-white create_po"><a class="create_purchase_order" href="/product_selling">Create Purchase Order</a></button>
       </div>
     </div>
     <div class="col-md-6">
@@ -114,9 +114,11 @@
                     $('.cust_last_name').val(data['customer_detail'][0]['last_name']);
                     $('.cust_address').val(data['customer_detail'][0]['address']);
                     $('.cust_phoneno').val(data['customer_detail'][0]['phone']);
+
                     $.each(data['order_detail'], function( index, val ) {
                         var new_url = "/single_product_detail?order_id="+val.id;
                         var order_date =  val.created_at ? val.created_at.split('T') : [''];
+                        $('.cust_id').val(val.id);
                         $('.order_detail').append(" <tr>" +
                             "<td> #PO"+index+"</td>" +
                             "<td>"+order_date[0]+"</td>" +
@@ -126,11 +128,11 @@
                     });
                     console.log(data);
                 }else{
-                    window.location.replace('/product_selling?status=3')
+                    window.location.replace('/product_selling?phone_number='+phone_number)
                 }
                 },
             error: function(data){
-                window.location.replace('/product_selling?status=3')
+                window.location.replace('/product_selling?phone_number='+phone_number)
             }
         });
 
@@ -179,7 +181,9 @@
 $('.create_po').click(function(){
   var phone_number = $('.customer_number').val()
     if (phone_number == ''){
-        
+      // #open modal
+    }else{
+        $(".create_purchase_order").attr("href", "/product_selling?phone_number="+phone_number);
     }
 
 });

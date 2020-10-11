@@ -1,3 +1,5 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div class="table-responsive mt-4" style="width: fit-content;margin-left: 10%;">
   <table class="table table-bordered table-hover text-">
     <tbody>
@@ -15,6 +17,7 @@
     </tr>
     </tbody>
   </table>
+  <input type="hidden" class="get_order_id" name="get_order_id" value="<%= @result[0]["order_detail"].order_id if @result.present? %>">
 </div>
 <div class="table-responsive mt-4" style="width: 80%; margin: 0 auto">
   <table class="table table-bordered table-hover text-center">
@@ -42,3 +45,35 @@
   <span>Sub Total</span>
   <span>&#x20B9;<%= @total_price %> 	</span>
 </div>
+<% if params['view_detail'].present? && params['view_detail'] == "true" %>
+  <div class="row mt-5 finalCheck-btn ml-auto mr-auto">
+    <div class="col-md-6">
+      <button class="btn btn-danger p-4 w-100">
+        Back
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary p-4 w-100 confirm_order">
+        Confirm
+      </button>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $('.confirm_order').click(function(){
+      var order_id = $('.get_order_id').val();
+      var data = {order_id:order_id};
+      $.ajax({
+          url:"/update_order_status",
+          method: "POST",
+          data: data,
+          success: function(data){
+              console.log(data);
+          },
+          error: function(data){
+
+          }
+      });
+  });
+</script>

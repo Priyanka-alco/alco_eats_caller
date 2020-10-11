@@ -14,19 +14,19 @@
                   <tbody>
                   <tr>
                     <td class="custdetails-info">First Name:</td>
-                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].first_name : '' %>" class="form-control"></td>
+                    <td><input type="text" name="first_name" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].first_name : '' %>" <%= @result['customer_detail'].present? ? "readonly" : '' %> class="form-control"></td>
                   </tr>
                   <tr>
                     <td class="custdetails-info">Last Name:</td>
-                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].last_name : '' %>" class="form-control"></td>
+                    <td><input type="text" name="last_name"  value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].last_name : '' %>"  <%= @result['customer_detail'].present? ? "readonly" : '' %>  class="form-control"></td>
                   </tr>
                   <tr>
                     <td class="custdetails-info">Address:</td>
-                    <td><textarea class="form-control" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].address : '' %>" style="height: 150px;"></textarea></td>
+                    <td><textarea name="address"  class="form-control" value="" style="height: 150px;" <%= @result['customer_detail'].present? ? "readonly" : '' %> ><%= @result['customer_detail'].present? ? @result['customer_detail'][0].address : '' %></textarea></td>
                   </tr>
                   <tr>
                     <td class="custdetails-info">Phone No:</td>
-                    <td><input type="text" value="<%= @result['customer_detail'].present? ? @result['customer_detail'][0].phone : '' %>" class="form-control customer_number"></td>
+                    <td><input type="text"  name="phone_no"  <%= @result['customer_detail'].present? ? "readonly" : '' %>  value="<%= params['phone_number'].present?  ? params['phone_number'] : '' %>" class="form-control customer_number"></td>
                   </tr>
                   </tbody>
 

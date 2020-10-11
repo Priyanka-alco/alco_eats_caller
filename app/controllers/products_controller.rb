@@ -77,7 +77,6 @@ class ProductsController < ApplicationController
     product_qty = params['qty']
     address = params['address']
     price = params['price']
-    debugger
     arr_price = price.values
     total_price = arr_price.map(&:to_f).reduce(:+)
     create_customer = Customer.create(:first_name=>name, :last_name=>last_name,:email=>email_id,:phone=>phone_no,:address=>address)
@@ -86,14 +85,27 @@ class ProductsController < ApplicationController
                                 :total=>total_price,
                                 :status=>1,
                                 :payment_type=>payment_type)
-    puts "********#{create_customer.id}*********#{create_order.id}"
+    # puts "********#{create_customer.id}*********#{create_order.id}"
     product_name.each_with_index do |val,index|
       OrderDetail.create(:sku_id=>product_sku["#{index}"],:order_id=>create_order.id,:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
-
-    redirect_to '/confirmation_page?order_id='+create_order.id
-
+    redirect_to  "/product_selling_detail?order_id=#{create_order.id}&&view_detail=true"
   end
+
+  def update_order_status
+    order_id = params['order_id']
+    get_order = Order.where("id=#{order_id}")
+
+    get_order_detail = OrderDetail.where("order_id=#{order_id}")
+    get_order[0].status = 2
+    get_order[0].save!
+    get_order_detail.each do |order_detail|
+      order_detail.status = 2
+      order_detail.save!
+    end
+    render :json=> true
+  end
+
 
   # GET /products/new
   def new

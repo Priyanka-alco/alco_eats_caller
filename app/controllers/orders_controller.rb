@@ -21,9 +21,6 @@ class OrdersController < ApplicationController
   def edit
   end
 
-  def confirmation_page
-
-  end
   def order
     seller = session[:admin] != true ? User.where("email='#{session[:email_id]}' and status =1") :  User.where("status =1")
     order_detail = Order.where("seller_id=#{seller[0].id}").order( 'id DESC' )
