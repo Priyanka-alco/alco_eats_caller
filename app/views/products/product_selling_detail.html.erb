@@ -16,7 +16,6 @@
     </tbody>
   </table>
 </div>
-
 <div class="table-responsive mt-4" style="width: 80%; margin: 0 auto">
   <table class="table table-bordered table-hover text-center">
     <thead>
@@ -29,8 +28,6 @@
     </thead>
     <tbody>
     <% @result.each_with_index do |val,index| %>
-    <%   %>
-
       <tr>
         <td><%= index %></td>
         <td><%= val['product_name'] %></td>
@@ -42,7 +39,6 @@
     <%end %>
     </tbody>
   </table>
-
   <span>Sub Total</span>
   <span>&#x20B9;<%= @total_price %> 	</span>
 </div>

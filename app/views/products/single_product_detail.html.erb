@@ -12,19 +12,19 @@
               <tbody>
               <tr>
                 <td class="custdetails-info">First Name:</td>
-                <td>Adit</td>
+                <td><%= @customer_detail[0].first_name%></td>
               </tr>
               <tr>
                 <td class="custdetails-info">Last Name:</td>
-                <td>Agrawal</td>
+                <td><%= @customer_detail[0].last_name %></td>
               </tr>
               <tr>
                 <td class="custdetails-info">Address:</td>
-                <td>54/957, satya prem vihar, mahadev ghat road, sundar nagar, Raipur, C.G</td>
+                <td><%= @customer_detail[0].address%></td>
               </tr>
               <tr>
                 <td class="custdetails-info">Phone No:</td>
-                <td><span>+91 </span><span>9863889678</span></td>
+                <td><span><%= @customer_detail[0].phone %></span></td>
               </tr>
               </tbody>
             </table>
@@ -43,6 +43,7 @@
                 <td>Name</td>
                 <td>Weight</td>
                 <td>Qty</td>
+                <td>Price Per Unit</td>
                 <td>Price</td>
               </tr>
               </thead>
@@ -50,16 +51,18 @@
           </div>
           <div class="table-responsive order-table">
             <table class="table table-borderless">
-
               <tbody>
-              <tr>
-                <td>S.No</td>
-                <td>Name</td>
-                <td>Weight</td>
-                <td>Qty</td>
-                <td>Price</td>
-              </tr>
-
+                <% @result.each_with_index do |val,index| %>
+                <% debugger %>
+                  <tr>
+                    <td><%= index %></td>
+                    <td><%= val['product_name'] %></td>
+                    <td><%= val["order_detail"].sku_id %></td>
+                    <td><%= val["order_detail"].quantity %></td>
+                    <td>&#x20B9;<%= val["order_detail"].selling_price.to_i/val["order_detail"].quantity.to_i %></td>
+                    <td>&#x20B9;<%= val["order_detail"].selling_price.to_i%></td>
+                  </tr>
+                <%end %>
               </tbody>
             </table>
           </div>
@@ -67,5 +70,4 @@
       </div>
     </div>
   </div>
-
 </div>
