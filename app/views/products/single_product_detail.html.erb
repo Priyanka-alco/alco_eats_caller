@@ -1,7 +1,9 @@
 <div class="container-fluid mt-4">
-  <div class="row title-msg">
-    <span>Please Verify the details to make the final edits</span>
-  </div>
+  <% if params['view_detail'].present? && params['view_detail'] == "true" %>
+    <div class="row title-msg">
+      <span>Please Verify the details to make the final edits</span>
+    </div>
+  <% end %>
   <div class="row mt-4 detailConfirmBox">
     <div class="col-md-4 box-1">
       <div class="card bg-light w-100">
@@ -53,7 +55,6 @@
             <table class="table table-borderless">
               <tbody>
                 <% @result.each_with_index do |val,index| %>
-                <% debugger %>
                   <tr>
                     <td><%= index %></td>
                     <td><%= val['product_name'] %></td>
@@ -72,3 +73,36 @@
   </div>
 </div>
 <!--view_detail-->
+
+<% if params['view_detail'].present? && params['view_detail'] == "true" %>
+  <div class="row mt-5 finalCheck-btn ml-auto mr-auto">
+    <div class="col-md-6">
+      <button class="btn btn-danger p-4 w-100">
+        Back
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-primary p-4 w-100 confirm_order">
+        Confirm
+      </button>
+    </div>
+  </div>
+<% end %>
+
+<script>
+    $('.confirm_order').click(function(){
+        var order_id = $('.get_order_id').val();
+        var data = {order_id:order_id};
+        $.ajax({
+            url:"/update_order_status",
+            method: "POST",
+            data: data,
+            success: function(data){
+                console.log(data);
+            },
+            error: function(data){
+
+            }
+        });
+    });
+</script>

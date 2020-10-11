@@ -45,35 +45,3 @@
   <span>Sub Total</span>
   <span>&#x20B9;<%= @total_price %> 	</span>
 </div>
-<% if params['view_detail'].present? && params['view_detail'] == "true" %>
-  <div class="row mt-5 finalCheck-btn ml-auto mr-auto">
-    <div class="col-md-6">
-      <button class="btn btn-danger p-4 w-100">
-        Back
-      </button>
-    </div>
-    <div class="col-md-6">
-      <button class="btn btn-primary p-4 w-100 confirm_order">
-        Confirm
-      </button>
-    </div>
-  </div>
-<% end %>
-
-<script>
-  $('.confirm_order').click(function(){
-      var order_id = $('.get_order_id').val();
-      var data = {order_id:order_id};
-      $.ajax({
-          url:"/update_order_status",
-          method: "POST",
-          data: data,
-          success: function(data){
-              console.log(data);
-          },
-          error: function(data){
-
-          }
-      });
-  });
-</script>

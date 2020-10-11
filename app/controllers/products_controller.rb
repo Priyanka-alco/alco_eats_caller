@@ -89,7 +89,7 @@ class ProductsController < ApplicationController
     product_name.each_with_index do |val,index|
       OrderDetail.create(:sku_id=>product_sku["#{index}"],:order_id=>create_order.id,:quantity=>product_qty["#{index}"],:selling_price=>price["#{index}"],:status=>1)
     end
-    redirect_to  "/product_selling_detail?order_id=#{create_order.id}&&view_detail=true"
+    redirect_to  "/single_product_detail?order_id=#{create_order.id}&&view_detail=true"
   end
 
   def update_order_status

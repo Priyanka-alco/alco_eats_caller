@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <div class="container-fluid mt-4">
   <div class="row ml-1">
@@ -107,7 +108,7 @@
             data: data,
             success: function(data){
                 $('.custdetails').show();
-
+debugger
                 if (data['status'] == 200){
 
                     $('.cust_first_name').val(data['customer_detail'][0]['first_name']);
