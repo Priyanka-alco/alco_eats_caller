@@ -42,10 +42,6 @@ class ProductsController < ApplicationController
           @result['status'] = 500
         end
         @result['product'] = res
-
-
-    # puts "****#{@result['product']}"
-        # render json: @result
   end
   def product_selling_detail
     order_id = params['order_id']
@@ -105,7 +101,25 @@ class ProductsController < ApplicationController
   end
 
   def single_product_detail
-
+    order_id = params['order_id']
+    get_order_detail = OrderDetail.where("order_id=#{order_id}")
+    @result = []
+    order = Order.where("id=#{order_id}")
+    customer_id = order[0].cust_id
+    customer_detail = Customer.where("id=#{customer_id}")
+    @customer_detail = customer_detail
+    # debugger
+    @total_price = order[0].total
+    get_order_detail.each_with_index do |val,index|
+      res = {}
+      res['order_detail']  = val
+      # @result << {"total_price": order.total}
+      # order_detail = Order.where("id=#{order_id}")
+      product_id =   ( index==0) ? index+1 : index
+      product_detail = Product.where("id=#{product_id}")
+      res['product_name'] = product_detail[0].product_name
+      @result << res
+    end
   end
 
   # GET /products/1/edit
