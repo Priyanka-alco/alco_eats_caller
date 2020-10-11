@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="row mt-3">
-        <button class="btn btn-primary p-4 w-100 text-white"><a href="/product_selling">Create Purchase Order</a></button>
+        <button class="btn btn-primary p-4 w-100 text-white create_po"><a href="/product_selling">Create Purchase Order</a></button>
       </div>
     </div>
     <div class="col-md-6">
@@ -176,5 +176,11 @@
             });
         }
     })
+$('.create_po').click(function(){
+  var phone_number = $('.customer_number').val()
+    if (phone_number == ''){
+        
+    }
 
+});
 </script>
