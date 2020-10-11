@@ -72,7 +72,6 @@ nav a:hover {
 }
 
 .cust-info a {
-    margin: 0 auto;
     color: white;
 }
 
@@ -81,12 +80,10 @@ nav a:hover {
 }
 
 .order-info a {
-    margin-left: 11%;
     color: white;
 }
 
 .po-list li a {
-    margin-left: 15%;
     font-size: 15px;
 }
 
